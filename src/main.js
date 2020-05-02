@@ -7,6 +7,8 @@ import App from './App.vue'
 
 import Router from "vue-router";
 import Index from "./components/Index.vue";
+import './main.css'
+
 
 Vue.use(Router);
 

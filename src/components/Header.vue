@@ -22,7 +22,7 @@ export default {
 }
 
 .logo {
-    font-family: Helvetica, sans-serif;
+    font-family: MarkPro;
     font-size: 45px;
     font-weight: 100;
     font-stretch: normal;
@@ -38,7 +38,7 @@ export default {
 }
 
 .log-in {
-    font-family: Helvetica, sans-serif;
+    font-family: MarkPro;
     font-size: 25px;
     font-weight: 100;
     font-stretch: normal;
@@ -60,7 +60,7 @@ export default {
     border-radius: 5px;
     border: solid 0.5px #707070;
     background-color: #514abf;
-    font-family: Helvetica, sans-serif;
+    font-family: MarkPro;
     font-size: 25px;
     font-weight: 100;
     font-stretch: normal;
