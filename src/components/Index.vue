@@ -25,6 +25,7 @@ export default {
 <style scoped>
   .index-wrap {
     width: 100%;
+    height: 100%;
     background-color: #1e2029;
   }
 
@@ -36,7 +37,7 @@ export default {
 
   .card-wrap {
     width: 80%;
-    margin-top: 32px;
+    margin-bottom: 48px;
     margin: auto;
   }
 

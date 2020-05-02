@@ -1,7 +1,6 @@
 <template>
   <div>
       <v-card class="card-wrap">
-            Hello
       </v-card>
     
   </div>
@@ -9,7 +8,10 @@
 
 <script>
 export default {
-  name: 'CreateStock'
+  name: 'CreateStock',
+  computed: {
+ 
+  }
 }
 </script>
 
