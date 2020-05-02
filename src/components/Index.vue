@@ -1,15 +1,22 @@
 <template>
   <div class="index-wrap">
-    <Header class="header-wrap"></Header>
+    <div class="header-wrap_index">
+      <Header></Header>
+    </div>  
+    <div >
+      <Create-Stock class="card-wrap"></Create-Stock>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from './Header.vue'
+import CreateStock from './CreateStock.vue'
 export default {
   name: 'Index',
   components: {
-    Header
+    Header,
+    CreateStock
   }
 }
 </script>
@@ -18,10 +25,18 @@ export default {
 <style scoped>
   .index-wrap {
     width: 100%;
+    background-color: #1e2029;
   }
 
-  .header-wrap {
+  .header-wrap_index {
     width: 80%;
+    margin: auto;
+    padding: 32px 0px;
+  }
+
+  .card-wrap {
+    width: 80%;
+    margin-top: 32px;
     margin: auto;
   }
 

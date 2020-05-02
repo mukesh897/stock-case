@@ -17,7 +17,6 @@ export default {
 
 <style>
   .main-wrap {
-    background-color: #1e2029;
     margin: -8px;
   }
 
