@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import { store } from './store/store.js'
+import { BootstrapVue, } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-Vue.use(Vuetify)
 import App from './App.vue'
+// import './custom.scss'
+
 
 import Router from "vue-router";
 import Index from "./components/Index.vue";
 import './main.css'
 
+Vue.use(BootstrapVue)
 
+Vue.use(Vuetify)
 Vue.use(Router);
 
 
