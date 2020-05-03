@@ -2,7 +2,7 @@
   <div class="header-wrap">
     <div class= "logo">stock <span class="logo_text-style-1">case </span></div>
     <div class="right-container">
-        <a class="log-in">log in</a>
+        <a @click= "showLoginModal" class="log-in">log in</a>
         <button class="sign-up__button">sign up</button>
     </div>
   </div>
@@ -10,7 +10,15 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+
+  methods: {
+      showLoginModal() {
+        this.$store.dispatch("showModalWithOptions", {
+          name: "loginModal"
+        });
+      }
+  }
 }
 </script>
 
@@ -56,7 +64,7 @@ export default {
 
 .sign-up__button {
     margin-left: 29.5px;
-    padding: 0px 17px;
+    padding: 0px 17px 5px;
     border-radius: 5px;
     border: solid 0.5px #707070;
     background-color: #514abf;

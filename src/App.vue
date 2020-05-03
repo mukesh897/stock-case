@@ -1,16 +1,17 @@
 <template>
   <div class="main-wrap">
     <router-view></router-view>
+    <login-modal></login-modal>
   </div>
 </template>
 
 <script>
-// import Index from './components/Index.vue'
+import loginModal from './globals/LoginModal.vue'
 
 export default {
   name: 'App',
   components: {
-    // Index
+    loginModal,
   }
 }
 </script>
