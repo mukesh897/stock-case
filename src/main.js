@@ -12,6 +12,7 @@ import App from './App.vue'
 import Router from "vue-router";
 import Index from "./components/Index.vue";
 import './main.css'
+import vuetify from './plugins/vuetify';
 
 Vue.use(BootstrapVue)
 
@@ -35,5 +36,6 @@ Vue.use(Vuetify);
 new Vue({
   router,
   store,
-  render: h => h(App),
+  vuetify,
+  render: h => h(App)
 }).$mount('#app')
