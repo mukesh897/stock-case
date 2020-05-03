@@ -73,6 +73,7 @@ export default loginModal;
   .modal-bg {
     background-color: #ffffff;
     padding: 15px;
+    position: fixed;
     padding-bottom: 40px;
   }
 

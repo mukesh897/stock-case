@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrap">
-    <router-view></router-view>
     <login-modal></login-modal>
+    <router-view></router-view>
   </div>
 </template>
 
