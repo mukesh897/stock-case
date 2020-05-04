@@ -7,13 +7,21 @@
       <Create-Stock class="card-wrap"></Create-Stock>
     </div>
     <div class="news-wrap">
-    <news></news>
+      <news></news>
     </div>
+    <div class="faq-wrap">
+    <Faqs></Faqs>
+    </div>
+    <div class="footer-wrap">
+      <Footer class="footer"></Footer>
+    </div> 
   </div>
 </template>
 
 <script>
 import Header from './Header.vue'
+import Faqs from './Faques.vue'
+import Footer from './Footer.vue'
 import CreateStock from './CreateStock.vue'
 import News from './News.vue'
 export default {
@@ -21,7 +29,9 @@ export default {
   components: {
     Header,
     CreateStock,
-    News
+    News,
+    Footer,
+    Faqs
   }
 }
 </script>
@@ -38,7 +48,26 @@ export default {
   .header-wrap_index {
     width: 80%;
     margin: auto;
-    padding: 32px 0px;
+    padding: 50px 0px;
+  }
+
+  .faq-wrap {
+    width: 80%;
+    padding-top: 60px;
+    margin: auto;
+  }
+
+  .footer-wrap {
+    margin-top: 80px;
+    padding-top: 50px;
+    width: 100%;
+    position: absolute;
+    background-color: #0e0e13
+  }
+
+  .footer {
+    width: 80%;
+    margin: auto;
   }
 
   .card-wrap {

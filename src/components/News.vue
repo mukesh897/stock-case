@@ -6,7 +6,6 @@
             <b-tabs content-class="mt-3">
                 
                 <b-tab id="tab-1" title="General" active>
-                    <div style="height: 2px; background-color: red; width: 80px;"></div>
                     <div class="row news-wrap-content mt-cus-17">
                         <div class="col-lg-8" style="padding: 15px;">
                             <div style="display: flex; justify-content: space-between;">
@@ -66,7 +65,7 @@ name: 'News',
     box-shadow: -2.5px -2.5px 2.5px 0 rgba(68, 63, 153, 0.07);
     background-color: #1e2029;
     padding: 15px;
-    margin-left: -109px;
+    margin-left: -109px !important;
 }
 
 .tab-under-a {
