@@ -46,6 +46,7 @@ export default {
 }
 
 .log-in {
+    cursor: pointer;
     font-family: MarkPro;
     font-size: 25px;
     font-weight: 100;

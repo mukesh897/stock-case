@@ -32,6 +32,7 @@ export default {
     width: 100%;
     height: 100%;
     background-color: #1e2029;
+    padding-bottom: 80px;
   }
 
   .header-wrap_index {

@@ -2,10 +2,11 @@
     <div>
        <div>
            <div style="display: flex; margin-top: 60px;">
-               <div class="news-heading news-title ">NEWS:</div>
+               <div class="news-heading news-title">NEWS:</div>
             <b-tabs content-class="mt-3">
                 
                 <b-tab id="tab-1" title="General" active>
+                    <div style="height: 2px; background-color: red; width: 80px;"></div>
                     <div class="row news-wrap-content mt-cus-17">
                         <div class="col-lg-8" style="padding: 15px;">
                             <div style="display: flex; justify-content: space-between;">
@@ -98,6 +99,7 @@ name: 'News',
 }
 
 .image-wrap {
+    float: right;
     width: 265px;
     height: 147.5px;
     object-fit: contain;
@@ -110,7 +112,7 @@ name: 'News',
 }
 
 .nav-tabs .nav-link {
-    border-bottom: 0px !important;
+    border: 0px !important;
     color: #ffffff;
     font-size: 31px;
     font-family: MarkPro;
