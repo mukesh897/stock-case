@@ -3,8 +3,8 @@
     <div>
       <div style="display: flex; margin-top: 60px;">
         <div class="news-heading news-title">NEWS:</div>
-        <b-tabs content-class="mt-3">
-          <b-tab id="tab-1" title="General" active>
+        <b-tabs v-model="tabIndex" content-class="mt-3">
+          <b-tab :title-link-class="linkClass(0)" title="General">
             <newsClip
               v-for="item in general"
               :key="item.id"
@@ -13,10 +13,10 @@
               :content="item.content"
             ></newsClip>
           </b-tab>
-          <b-tab class="tab-text" title="Positive">
+          <b-tab :title-link-class="linkClass(1)" title="Positive">
             <p>I'm the second tab</p>
           </b-tab>
-          <b-tab class="tab-text" title="Negative">
+          <b-tab :title-link-class="linkClass(2)" title="Negative">
             <p>I'm a disabled tab!</p>
           </b-tab>
         </b-tabs>
@@ -32,6 +32,7 @@ export default {
   components: {newsClip},
   data() {
     return {
+      tabIndex: 0,
       general: [
         {
           id: 0,
@@ -56,52 +57,20 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    linkClass(i) {
+      if (this.tabIndex === i) {
+        return ['tab-1']
+      } else {
+        return ['tab-text']
+      }
+    }
   }
 };
 </script>
 
 <style>
-.news-wrap-content {
-  box-shadow: -2.5px -2.5px 2.5px 0 rgba(68, 63, 153, 0.07);
-  background-color: #1e2029;
-  padding: 15px;
-  margin-left: -109px !important;
-}
-
-.tab-under-a {
-  border-bottom: #ffffff;
-}
-
-.news-heading {
-  font-family: MarkPro;
-  font-size: 22.5px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.27;
-  letter-spacing: normal;
-  text-align: left;
-  color: #ffffff;
-}
-
-.news-sub-heading {
-  font-family: MarkPro;
-  font-size: 22.5px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.27;
-  letter-spacing: normal;
-  text-align: left;
-  color: #ffffff;
-}
-
-.image-wrap {
-  float: right;
-  width: 265px;
-  height: 147.5px;
-  object-fit: contain;
-}
 
 .nav-tabs {
   margin-top: 48px;
@@ -132,7 +101,7 @@ export default {
 .mt-cus-17 {
   margin-top: 17px;
 }
-#tab-1 .ul .li {
+/* #tab-1 .ul .li {
   border-bottom: 2px solid red !important;
-}
+} */
 </style>

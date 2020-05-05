@@ -34,10 +34,6 @@ export default {
   margin-left: -109px !important;
 }
 
-.tab-under-a {
-  border-bottom: #ffffff;
-}
-
 .news-heading {
   font-family: MarkPro;
   font-size: 22.5px;
@@ -69,36 +65,10 @@ export default {
   object-fit: contain;
 }
 
-.nav-tabs {
-  margin-top: 48px;
-  margin-left: 60px;
-  border-bottom: 0px !important;
-}
-
-.nav-tabs .nav-link {
-  border: 0px !important;
-  color: #ffffff;
-  font-size: 31px;
-  font-family: MarkPro;
-  opacity: 0.2;
-}
-
-.nav-tabs .nav-link.active {
-  color: #ffffff;
-  background-color: transparent;
-  border: 0px;
-  font-family: MarkPro;
-  font-size: 31px;
-  font-weight: 500;
-  opacity: 1;
-}
-.news-title {
-  margin-top: 70px;
-}
 .mt-cus-17 {
   margin-top: 17px;
 }
-#tab-1 .ul .li {
+/* #tab-1 .ul .li {
   border-bottom: 2px solid red !important;
-}
+} */
 </style>
