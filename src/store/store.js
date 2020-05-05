@@ -6,7 +6,7 @@ Vue.use(Vuex);
 function initialState() {
     return {
         modals: [{
-                name: "signupModal",
+                name: "signUpModal",
                 show: false
             },
             {
