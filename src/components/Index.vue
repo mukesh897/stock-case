@@ -3,8 +3,8 @@
     <div class="header-wrap_index">
       <Header></Header>
     </div>  
-    <div >
-      <Create-Stock class="card-wrap"></Create-Stock>
+    <div class="card-wrap">
+      <Create-Stock></Create-Stock>
     </div>
     <div class="news-wrap">
       <news></news>
@@ -72,7 +72,6 @@ export default {
 
   .card-wrap {
     width: 80%;
-    margin-bottom: 48px;
     margin: auto;
   }
 

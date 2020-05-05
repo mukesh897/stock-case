@@ -1,21 +1,25 @@
 <template>
   <div>
       <v-card class="card-wrap">
-        <v-autocomplete
-        v-model="select"
-        :loading="loading"
-        :items="items"
-        :search-input.sync="search"
-        cache-items
-        class="mx-4"
-        flat
-        hide-no-data
-        hide-details
-        label="What state are you from?"
-        solo-inverted
-    ></v-autocomplete>
+        <div class="title-wrapper">
+          <div class="Create-stockcase">Create Stockcase</div>
+          <div style="width: 30%; float: right;">
+            <v-autocomplete
+              v-model="select"
+              :loading="loading"
+              :items="items"
+              :search-input.sync="search"
+              cache-items
+              class="mx-4"
+              flat
+              hide-no-data
+              hide-details
+              label="Select minimum 2 stocks"
+              solo-inverted
+          ></v-autocomplete>
+          </div>
+        </div>
       </v-card>
-    
   </div>
 </template>
 
@@ -28,66 +32,10 @@ export default {
         items: [],
         search: null,
         select: null,
-        states: [
-          'Alabama',
-          'Alaska',
-          'American Samoa',
-          'Arizona',
-          'Arkansas',
-          'California',
-          'Colorado',
-          'Connecticut',
-          'Delaware',
-          'District of Columbia',
-          'Federated States of Micronesia',
-          'Florida',
-          'Georgia',
-          'Guam',
-          'Hawaii',
-          'Idaho',
-          'Illinois',
-          'Indiana',
-          'Iowa',
-          'Kansas',
-          'Kentucky',
-          'Louisiana',
-          'Maine',
-          'Marshall Islands',
-          'Maryland',
-          'Massachusetts',
-          'Michigan',
-          'Minnesota',
-          'Mississippi',
-          'Missouri',
-          'Montana',
-          'Nebraska',
-          'Nevada',
-          'New Hampshire',
-          'New Jersey',
-          'New Mexico',
-          'New York',
-          'North Carolina',
-          'North Dakota',
-          'Northern Mariana Islands',
-          'Ohio',
-          'Oklahoma',
-          'Oregon',
-          'Palau',
-          'Pennsylvania',
-          'Puerto Rico',
-          'Rhode Island',
-          'South Carolina',
-          'South Dakota',
-          'Tennessee',
-          'Texas',
-          'Utah',
-          'Vermont',
-          'Virgin Island',
-          'Virginia',
-          'Washington',
-          'West Virginia',
-          'Wisconsin',
-          'Wyoming',
+        stocks: [
+          'Facebook',
+          'Snapchat',
+          'Twitter',
         ],
       }
     },
@@ -101,7 +49,7 @@ export default {
         this.loading = true
         // Simulated ajax query
         setTimeout(() => {
-          this.items = this.states.filter(e => {
+          this.items = this.stocks.filter(e => {
             return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
           })
           this.loading = false
@@ -114,9 +62,70 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .card-wrap {
-        height: 360px;
-        border-radius: 5px;
-        box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
-        background-color: #252834 !important;
+      height: 360px;
+      border-radius: 5px;
+      box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
+      background-color: #252834 !important;
     }
+    .title-wrapper {
+      display:flex;
+      justify-content: space-between;
+      margin-top: 5%;
+      width: 90%;
+      margin: auto;
+      padding-top: 2%;
+    }
+    .Create-stockcase {
+      font-family: MarkPro;
+      font-size: 25px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.28;
+      letter-spacing: normal;
+      text-align: left;
+      color: #ffffff;
+    }
+</style>
+
+<style>
+ .v-input__slot {
+    border-radius: 10.5px !important;
+    border: solid 0.5px #707070 !important;
+    background-color: #252834;
+    width: 30%;
+    min-height: 31px !important;
+    float: right !important;
+    margin-left: auto;
+  }
+  .theme--light.v-sheet{
+    border: solid 0.5px #707070 !important;
+    background-color: #252834 !important;
+  }
+  .v-input .v-label {
+    opacity: 0.15 !important;
+    font-family: MarkPro !important;
+    font-size: 12.5px !important;
+    font-weight: 500 !important;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.24 !important;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff !important;
+  }
+  .theme--light.v-list-item .v-list-item__mask {
+    color: #514abf !important;
+    background: transparent !important;
+  }
+  .v-list-item__title {
+    font-family: MarkPro !important;
+    font-size: 16.5px !important;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.24 !important;
+    letter-spacing: normal;
+    color: #ffffff !important;
+  }
 </style>
