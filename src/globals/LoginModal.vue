@@ -2,22 +2,23 @@
   <div>
     <v-dialog v-model="loginModal" :width="loginModalWidth" :height="loginModalHeight"
       @keydown.esc="loginModal = false">
-      <div class="modal-bg">
-        <div class="close-btn">
-          <i class="icon-close icon-close__style" @click="loginModal = false"></i>
-        </div>
-        <div class="mt-cus-15 center-text">
-          <p class="success-title pat-5">ALERT SET SUCCESSFULLY</p>
-          <p class="success-subtitle pat-5">Your alert for <span class="success-subtitle__bold">ETH/USDC</span> for the
-            duration of <span class="success-subtitle success-subtitle__bold">28 Days</span> has
-            been set successfully. You will be notified on reaching
-            the Trigger point of <span class="success-subtitle__bold">4,756 USDC/ETH.</span>
-          </p>
-        </div>
-        <div class="center-text">
-          <button class="button button__message">DONE</button>
-        </div>
-      </div>
+      <v-content>
+        <v-container class="fill-height" fluid>
+          <v-row align="center" justify="center">
+            <v-col cols="12" sm="8" md="4">
+              <v-card class="login-card">
+                <v-text-field class="email-field" background-color="#1e2029" color="#ffffff" id="email" label="Email" name="login" type="text" outlined dark />
+                <v-text-field class="password-field" background-color="#1e2029" color="#ffffff" id="password" label="Password" name="password" type="password" outlined dark />
+                <v-col align="center">
+                  <v-btn class="login-button" min-height="50px" height="7.2%">Login</v-btn>
+                  <v-divider></v-divider>
+                  <v-btn>Continue with google</v-btn>
+                </v-col>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-content>
     </v-dialog>
   </div>
 </template>
@@ -34,7 +35,7 @@ class loginModal extends Vue {
   loginModalHeight = "";
 
   get loginModal() {
-    var value = this.$store.getters.getModalShowState(this.modalName);
+    let value = this.$store.getters.getModalShowState(this.modalName);
     return value.show;
   }
 
@@ -45,12 +46,12 @@ class loginModal extends Vue {
   }
 
   get loginModalData() {
-    var value = this.$store.getters.getModalShowState(this.modalName);
+    let value = this.$store.getters.getModalShowState(this.modalName);
     return value.data;
   }
     
   mounted() {
-    var width = window.innerWidth;
+    let width = window.innerWidth;
     if(width > 678) {
       this.loginModalWidth = "80%";
       this.loginModalHeight = "60.9%";
@@ -64,81 +65,14 @@ class loginModal extends Vue {
 export default loginModal;
 </script>
 
-<style>
-  .icon-close__style {
-    margin-left: auto;
-    color: #777;
-  }
-  
-  .modal-bg {
-    background-color: #ffffff;
-    padding: 15px;
-    position: fixed;
-    padding-bottom: 40px;
+<style scoped>
+  .login-card.v-card {
+    background-color: #252834;
+    padding: 10% 2.5% !important;
   }
 
-  .mt-cus-15 {
-    margin-top: 15px;
-  }
-
-  .center-text {
-    text-align: center;
-  }
-
-  .pat-5 {
-    margin-top: 5% !important;
-  }
-
-  .success-title {
-    font-family: RubikMedium;
-    width: 75%;
-    margin: auto;
-    font-size: 15px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: 2px;
-    color: #777777;
-  }
-
-  .success-subtitle {
-    width: 75%;
-    margin: auto;  
-    font-family: Rubik;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.43;
-    letter-spacing: 0.4px;
-    text-align: center;
-    color: #9d9fa2;
-  }
-
-  .success-subtitle__bold {
-    font-style: RubikBold;  
-    font-weight: 500;
-  }
-
-  .button {
-    border-radius: 2px;
-    background-color: #335fff;
-    width: 30%;
-    margin-top: 6.5%;
-    padding: 14px 0px;
-  }
-
-  .button__message {
-    font-family: Rubik;
-    font-size: 16px;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.25;
-    letter-spacing: 1.2px;
-    text-align: center;
-    color: #ffffff;
+  .login-button {
+    color: #514abf;
   }
 
   @media only screen and (max-width: 768px) {

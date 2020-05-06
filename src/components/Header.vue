@@ -3,7 +3,7 @@
     <div class= "logo">stock <span class="logo_text-style-1">case </span></div>
     <div class="right-container">
         <a @click= "showLoginModal" class="log-in">log in</a>
-        <button class="sign-up__button">sign up</button>
+        <button @click="showSignUpModal" class="sign-up__button">sign up</button>
     </div>
   </div>
 </template>
@@ -17,6 +17,12 @@ export default {
         this.$store.dispatch("showModalWithOptions", {
           name: "loginModal"
         });
+      },
+
+      showSignUpModal() {
+          this.$store.dispatch("showModalWithOptions", {
+              name: "signUpModal"
+          });
       }
   }
 }

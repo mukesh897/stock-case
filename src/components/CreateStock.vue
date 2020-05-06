@@ -1,6 +1,9 @@
 <template>
   <div>
       <v-card class="card-wrap">
+        <div>
+          <apexchart width="500" type="line" :options="options" :series="series"></apexchart>
+        </div>
         <div class="title-wrapper">
           <div class="Create-stockcase">Create Stockcase</div>
           <div style="width: 30%; float: right;">
@@ -37,6 +40,18 @@ export default {
           'Snapchat',
           'Twitter',
         ],
+            options: {
+              chart: {
+                id: 'vuechart-example'
+              },
+              xaxis: {
+                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+              }
+            },
+            series: [{
+              name: 'series-1',
+              data: [30, 40, 45, 50, 49, 60, 70, 91]
+            }]
       }
     },
     watch: {
@@ -86,9 +101,6 @@ export default {
       text-align: left;
       color: #ffffff;
     }
-</style>
-
-<style>
  .v-input__slot {
     border-radius: 10.5px !important;
     border: solid 0.5px #707070 !important;
