@@ -19,7 +19,7 @@
           ></v-autocomplete>
           </div>
         </div>
-        <div v-if="zeroState == 'true'" class="">
+        <div v-if="zeroState == true" class="">
           <div class=""> 
             
           </div>
@@ -35,39 +35,64 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
+import NewsService from '../NewsService';
 export default {
   name: 'CreateStock',
   data () {
       return {
         loading: false,
         items: [],
+        zeroState: true,
         search: null,
         select: null,
         stocks: [
-          'Facebook',
-          'Snapchat',
-          'Twitter',
-        ],
+          {
+              "name": "Facebook Inc. Class A",
+              "symbol": "FB",
+              "exchange": "NAS"
+          },
+          {
+              "name": "Surface Oncology Inc.",
+              "symbol": "SURF",
+              "exchange": "NAS"
+          },
+          {
+              "name": "Interface Inc.",
+              "symbol": "TILE",
+              "exchange": "NAS"
+          }
+      ],
       }
     },
     watch: {
-      search (val) {
-        this.$store.state.zeroState = !this.$store.state.zeroState 
-        val && val !== this.select && this.querySelections(val)
+      async search(val) {
+        let placeholder = val && val !== this.select && this.querySelections(val)
+        if(placeholder == true){
+          return placeholder
+        } else {
+          await this.$store.dispatch("fetchNews",this.select); 
+        }
+
       },
     },
-    computed: {
-      ...mapState ({
-        zeroState: "zeroState"
-      }),
-    },
+    // computed: {
+    //   ...mapState ({
+    //     zeroState: "zeroState"
+    //   }),
+    // },
     methods: {
       querySelections (v) {
         this.loading = true
+        this.zeroState = !this.zeroState;
+        
         // Simulated ajax query
         setTimeout(() => {
-          this.items = this.stocks.filter(e => {
+          let stockNamesList = [];
+          this.stocks.forEach(stock => {
+            stockNamesList.push(stock["name"])
+          })
+          this.items = stockNamesList.filter(e => {
             return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
           })
           this.loading = false

@@ -6,7 +6,7 @@
             <b-tabs content-class="mt-3">
                 
                 <b-tab id="tab-1" title="General" active>
-                    <div class="row news-wrap-content mt-cus-17">
+                    <li v-bind:v-for="(item) in getNews" class="row news-wrap-content mt-cus-17">
                         <div class="col-lg-8" style="padding: 15px;">
                             <div style="display: flex; justify-content: space-between;">
                                 <div class="news-heading"> The Wall Street Journal</div>
@@ -18,33 +18,8 @@
                         <div class="col-lg-4">
                             <img class="image-wrap" src="https://image.cnbcfm.com/api/v1/image/105060153-GettyImages-930533880.jpg?v=1551890483&w=1910"/>
                         </div>
-                    </div>
-                    <div class="row news-wrap-content mt-cus-17">
-                        <div class="col-lg-8" style="padding: 15px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <div class="news-heading"> The Wall Street Journal</div>
-                                <div class="news-sub-heading"> 3h </div>
-                            </div>
-                            <p class="news-sub-heading mt-cus-17"> Musk’s SpaceX, Bezos’ Blue Origin land contract
-                                to build NASA’s astronaut moon lander</p>
-                        </div>
-                        <div class="col-lg-4">
-                            <img class="image-wrap" src="https://image.cnbcfm.com/api/v1/image/105060153-GettyImages-930533880.jpg?v=1551890483&w=1910"/>
-                        </div>
-                    </div>
-                    <div class="row news-wrap-content mt-cus-17">
-                        <div class="col-lg-8" style="padding: 15px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <div class="news-heading"> The Wall Street Journal</div>
-                                <div class="news-sub-heading"> 3h </div>
-                            </div>
-                            <p class="news-sub-heading mt-cus-17"> Musk’s SpaceX, Bezos’ Blue Origin land contract
-                                to build NASA’s astronaut moon lander</p>
-                        </div>
-                        <div class="col-lg-4">
-                            <img class="image-wrap" src="https://image.cnbcfm.com/api/v1/image/105060153-GettyImages-930533880.jpg?v=1551890483&w=1910"/>
-                        </div>
-                    </div>
+                    </li>    
+                    
                 </b-tab>
                 <b-tab class="tab-text" title="Positive"><p>I'm the second tab</p></b-tab>
                 <b-tab class="tab-text" title="Negative"><p>I'm a disabled tab!</p></b-tab>
@@ -55,8 +30,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
 name: 'News', 
+computed: {
+    ...mapState({
+        news: "news"
+    }),
+    getNews() {
+    return this.news;
+}
+},
+
+
 }
 </script>
 
