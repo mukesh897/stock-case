@@ -1,6 +1,6 @@
 <template>
   <div>
-      <v-card class="card-wrap">
+      <div class="card-wrap">
         <div class="title-wrapper">
           <div class="Create-stockcase">Create Stockcase</div>
           <div style="width: 30%; float: right;">
@@ -19,11 +19,23 @@
           ></v-autocomplete>
           </div>
         </div>
-      </v-card>
+        <div v-if="zeroState == 'true'" class="">
+          <div class=""> 
+            
+          </div>
+          <div class="zero-text-wrap">
+            <p class="zero-state-text">
+              Create and analyse
+              your stockcase
+            </p>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'CreateStock',
   data () {
@@ -41,8 +53,14 @@ export default {
     },
     watch: {
       search (val) {
+        this.$store.state.zeroState = !this.$store.state.zeroState 
         val && val !== this.select && this.querySelections(val)
       },
+    },
+    computed: {
+      ...mapState ({
+        zeroState: "zeroState"
+      }),
     },
     methods: {
       querySelections (v) {
@@ -66,6 +84,23 @@ export default {
       border-radius: 5px;
       box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
       background-color: #252834 !important;
+    }
+    .zero-text-wrap {
+      width: 50%;
+      margin-top: 30px;
+      margin-right: 50px;
+      margin-left: auto;
+    }
+    .zero-state-text {
+      font-family: MarkPro;
+      font-size: 52.5px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.27;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
     }
     .title-wrapper {
       display:flex;
