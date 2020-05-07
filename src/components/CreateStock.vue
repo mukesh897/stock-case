@@ -1,9 +1,6 @@
 <template>
   <div>
-      <v-card class="card-wrap">
-        <div>
-          <apexchart width="500" type="line" :options="options" :series="series"></apexchart>
-        </div>
+      <div class="card-wrap">
         <div class="title-wrapper">
           <div class="Create-stockcase">Create Stockcase</div>
           <div style="width: 30%; float: right;">
@@ -22,11 +19,23 @@
           ></v-autocomplete>
           </div>
         </div>
-      </v-card>
+        <div v-if="zeroState == 'true'" class="">
+          <div class="">
+
+          </div>
+          <div class="zero-text-wrap">
+            <p class="zero-state-text">
+              Create and analyse
+              your stockcase
+            </p>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'CreateStock',
   data () {
@@ -40,24 +49,18 @@ export default {
           'Snapchat',
           'Twitter',
         ],
-            options: {
-              chart: {
-                id: 'vuechart-example'
-              },
-              xaxis: {
-                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-              }
-            },
-            series: [{
-              name: 'series-1',
-              data: [30, 40, 45, 50, 49, 60, 70, 91]
-            }]
       }
     },
     watch: {
       search (val) {
+        this.$store.state.zeroState = !this.$store.state.zeroState
         val && val !== this.select && this.querySelections(val)
       },
+    },
+    computed: {
+      ...mapState ({
+        zeroState: "zeroState"
+      }),
     },
     methods: {
       querySelections (v) {
@@ -82,6 +85,23 @@ export default {
       box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
       background-color: #252834 !important;
     }
+    .zero-text-wrap {
+      width: 50%;
+      margin-top: 30px;
+      margin-right: 50px;
+      margin-left: auto;
+    }
+    .zero-state-text {
+      font-family: MarkPro;
+      font-size: 52.5px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.27;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
     .title-wrapper {
       display:flex;
       justify-content: space-between;
@@ -101,6 +121,9 @@ export default {
       text-align: left;
       color: #ffffff;
     }
+</style>
+
+<style>
  .v-input__slot {
     border-radius: 10.5px !important;
     border: solid 0.5px #707070 !important;

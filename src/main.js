@@ -12,6 +12,7 @@ import App from './App.vue'
 
 import Router from "vue-router";
 import Index from "./components/Index.vue";
+import Dashboard from "./components/Dashboard.vue";
 import './main.css'
 import vuetify from './plugins/vuetify';
 
@@ -23,6 +24,7 @@ Vue.component('apexchart', VueApexCharts)
 
 const routes = [
   { path: '/', component: Index},
+  {path:'/dashboard',component: Dashboard}
 ];
 
 const router = new Router({
