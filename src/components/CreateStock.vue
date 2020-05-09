@@ -2,7 +2,7 @@
   <div>
       <div class="card-wrap">
         <div class="title-wrapper">
-          <div class="Create-stockcase">Create Stockcase</div>
+          <div class="Create-stockcase">Create<input v-model="stockCase"></div>
           <div style="width: 30%; float: right;">
             <v-autocomplete
               v-model="select"
@@ -30,6 +30,18 @@
             </p>
           </div>
         </div>
+        <div v-else>
+          <table>
+            <thead>
+              <th>Stock</th>
+              <th>Price</th>
+            </thead>
+            <tbody>
+              <td></td>
+              <td></td>
+            </tbody>
+          </table>
+        </div>
       </div>
   </div>
 </template>
@@ -46,6 +58,7 @@ export default {
         zeroState: true,
         search: null,
         select: null,
+        stockCase: "stockCase",
         stocks: [
           {
               "name": "Facebook Inc. Class A",
@@ -99,6 +112,11 @@ export default {
         }, 500)
       },
     },
+     mounted: {
+      async setNews() {
+        await this.$store.dispatch("fetchNews", "Facebook Inc. Class A")
+      }
+     }
 }
 </script>
 

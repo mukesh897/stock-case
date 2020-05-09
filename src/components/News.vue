@@ -10,8 +10,9 @@
                     :key="index"
                     :title="news.title"
                     :description="news.description"
-                    :url="news.url"
-                    :time="news.publishedAt">
+                    :url="news.urlToImage"
+                    :time="news.publishedAt"
+                    :link="news.url">
                     </news-clip>
                     
                 </b-tab>
@@ -24,7 +25,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 import NewsClip from './NewsClip';
 export default {
 name: 'News', 
@@ -32,13 +33,12 @@ components: {
     NewsClip,
     news: []
 },
-computed: {
-    news() {
-        return this.$store.state.news
-    },
-}
-
-
+ computed: mapGetters(['news']),
+  watch: {
+    news(newValue, oldValue) {
+      console.log(`Updating from ${oldValue} to ${newValue}`);
+    }, 
+  },  
 
 }
 </script>
