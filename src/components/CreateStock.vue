@@ -37,10 +37,15 @@
               <th>Price</th>
             </thead>
             <tbody>
-              <td></td>
-              <td></td>
+              <tr v-for="(item, index) in bucket"
+              :key="index">
+                <button style="background-color: white"></button>
+                <td>{{bucket[index].companyName}}</td>
+                <td>{{bucket[index].latestPrice}}</td>
+               </tr> 
             </tbody>
           </table>
+          <button  style="background: green; color: white" >CREATE @click="createBucket"</button>
         </div>
       </div>
   </div>
@@ -58,7 +63,8 @@ export default {
         zeroState: true,
         search: null,
         select: null,
-        stockCase: "stockCase",
+        bucket: [],
+        stockCase: "stockcase",
         stocks: [
           {
               "name": "Facebook Inc. Class A",
@@ -85,8 +91,18 @@ export default {
           return placeholder
         } else {
           await this.$store.dispatch("fetchNews",this.select); 
+          let symbol = ""
+          this.stocks.forEach((stock)=> {
+            if(stock["name"] == this.select) {
+              symbol = stock["symbol"]
+            }
+          })
+          let data = await NewsService.getStockPrice(symbol);
+          console.log(data.result + "result")
+          this.bucket.push(data.result);
+          console.log("Printing bucker")
+          console.log(this.bucket)
         }
-
       },
     },
     // computed: {
@@ -111,6 +127,9 @@ export default {
           this.loading = false
         }, 500)
       },
+      createBucket() {
+
+      }
     },
      mounted: {
       async setNews() {

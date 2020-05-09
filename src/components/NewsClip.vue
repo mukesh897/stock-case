@@ -58,8 +58,7 @@ export default {
             }
         },
         redirect() {
-            window.location = 'this.link';
-
+            window.location.replace(this.link)
         }
     }
 }
