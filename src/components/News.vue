@@ -6,45 +6,14 @@
             <b-tabs content-class="mt-3">
                 
                 <b-tab id="tab-1" title="General" active>
-                    <div class="row news-wrap-content mt-cus-17">
-                        <div class="col-lg-8" style="padding: 15px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <div class="news-heading"> The Wall Street Journal</div>
-                                <div class="news-sub-heading"> 3h </div>
-                            </div>
-                            <p class="news-sub-heading mt-cus-17"> Musk’s SpaceX, Bezos’ Blue Origin land contract
-                                to build NASA’s astronaut moon lander</p>
-                        </div>
-                        <div class="col-lg-4">
-                            <img class="image-wrap" src="https://image.cnbcfm.com/api/v1/image/105060153-GettyImages-930533880.jpg?v=1551890483&w=1910"/>
-                        </div>
-                    </div>
-                    <div class="row news-wrap-content mt-cus-17">
-                        <div class="col-lg-8" style="padding: 15px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <div class="news-heading"> The Wall Street Journal</div>
-                                <div class="news-sub-heading"> 3h </div>
-                            </div>
-                            <p class="news-sub-heading mt-cus-17"> Musk’s SpaceX, Bezos’ Blue Origin land contract
-                                to build NASA’s astronaut moon lander</p>
-                        </div>
-                        <div class="col-lg-4">
-                            <img class="image-wrap" src="https://image.cnbcfm.com/api/v1/image/105060153-GettyImages-930533880.jpg?v=1551890483&w=1910"/>
-                        </div>
-                    </div>
-                    <div class="row news-wrap-content mt-cus-17">
-                        <div class="col-lg-8" style="padding: 15px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <div class="news-heading"> The Wall Street Journal</div>
-                                <div class="news-sub-heading"> 3h </div>
-                            </div>
-                            <p class="news-sub-heading mt-cus-17"> Musk’s SpaceX, Bezos’ Blue Origin land contract
-                                to build NASA’s astronaut moon lander</p>
-                        </div>
-                        <div class="col-lg-4">
-                            <img class="image-wrap" src="https://image.cnbcfm.com/api/v1/image/105060153-GettyImages-930533880.jpg?v=1551890483&w=1910"/>
-                        </div>
-                    </div>
+                    <news-clip v-for="(news, index) in news"
+                    :key="index"
+                    :title="news.title"
+                    :description="news.description"
+                    :url="news.url"
+                    :time="news.publishedAt">
+                    </news-clip>
+                    
                 </b-tab>
                 <b-tab class="tab-text" title="Positive"><p>I'm the second tab</p></b-tab>
                 <b-tab class="tab-text" title="Negative"><p>I'm a disabled tab!</p></b-tab>
@@ -55,8 +24,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import NewsClip from './NewsClip';
 export default {
 name: 'News', 
+components: {
+    NewsClip,
+    news: []
+},
+computed: {
+    news() {
+        return this.$store.state.news
+    },
+}
+
+
+
 }
 </script>
 

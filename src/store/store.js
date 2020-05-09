@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import NewsService from '../NewsService';
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ function initialState() {
 export const store = new Vuex.Store({
     strict: true,
     state: initialState(),
+    news: [],
     mutations: {
         showModal(state, {
             name,
@@ -65,8 +67,14 @@ export const store = new Vuex.Store({
                     Vue.set(state.modals, index, element)
             }
         },
+        setNews(state, news) {
+            state.news = news;
+        },
     },
     actions: {
+        setNews({commit}, news) {
+            commit("setNews", news);
+        },
         showModal({
             commit
         }, name) {
@@ -97,7 +105,15 @@ export const store = new Vuex.Store({
                 name: name,
                 show: false
             });
-        }
+        },
+        async fetchNews({dispatch},news) {
+            try {
+              var response = (await NewsService.getStockData(news));
+              dispatch("setNews", response.result);
+            } catch (error) {
+              dispatch("setNews", []);
+            }
+        },
     },
     getters: {
         //This is not working, it is returning the correct object but not able to typecast
