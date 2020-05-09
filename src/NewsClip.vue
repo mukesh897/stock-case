@@ -1,5 +1,5 @@
 <template>
-  <div class="row news-wrap-content mt-cus-17">
+  <div @click="redirect" class="row news-wrap-content mt-cus-17">
     <div class="col-lg-8" style="padding: 15px;">
       <div style="display: flex; justify-content: space-between;">
         <div class="news-heading">{{heading}}</div>
@@ -23,6 +23,11 @@ export default {
     subHeading: String,
     content: String,
     url: String
+  },
+  methods: {
+    redirect() {
+      window.location = 'https://google.com'
+    }
   }
 };
 </script>

@@ -2,7 +2,7 @@
   <div>
       <div class="card-wrap">
         <div class="title-wrapper">
-          <div class="Create-stockcase">Create<input v-model="stockCase"></div>
+          <div class="Create-stockcase">Create  <input v-model="stockCase"><div class="under-line"></div></div>
           <div style="width: 30%; float: right;">
             <v-autocomplete
               v-model="select"
@@ -122,6 +122,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .under-line {
+      height: 2px;
+      width: 35%;
+      margin-left: 25%;
+      border-radius: 5px;
+      box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
+      background-color: #1e2029;;
+    }
     .card-wrap {
       height: 360px;
       border-radius: 5px;
