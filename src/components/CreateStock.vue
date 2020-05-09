@@ -45,7 +45,7 @@
                </tr> 
             </tbody>
           </table>
-          <button  style="background: green; color: white" >CREATE @click="createBucket"</button>
+          <button @click="createBucket" style="background: green; color: white" >CREATE</button>
         </div>
       </div>
   </div>
@@ -65,23 +65,7 @@ export default {
         select: null,
         bucket: [],
         stockCase: "stockcase",
-        stocks: [
-          {
-              "name": "Facebook Inc. Class A",
-              "symbol": "FB",
-              "exchange": "NAS"
-          },
-          {
-              "name": "Surface Oncology Inc.",
-              "symbol": "SURF",
-              "exchange": "NAS"
-          },
-          {
-              "name": "Interface Inc.",
-              "symbol": "TILE",
-              "exchange": "NAS"
-          }
-      ],
+        stocks: [],
       }
     },
     watch: {
@@ -90,6 +74,7 @@ export default {
         if(placeholder == true){
           return placeholder
         } else {
+          this.zeroState = !this.zeroState;
           await this.$store.dispatch("fetchNews",this.select); 
           let symbol = ""
           this.stocks.forEach((stock)=> {
@@ -111,11 +96,10 @@ export default {
     //   }),
     // },
     methods: {
-      querySelections (v) {
+      async querySelections (v) {
         this.loading = true
-        this.zeroState = !this.zeroState;
-        
-        // Simulated ajax query
+        var data2 = await NewsService.searchStocks(v)
+        this.stocks = data2.result
         setTimeout(() => {
           let stockNamesList = [];
           this.stocks.forEach(stock => {
@@ -127,7 +111,15 @@ export default {
           this.loading = false
         }, 500)
       },
-      createBucket() {
+      async createBucket() {
+        let stockIdList = [];
+          this.stocks.forEach(stock => {
+            stockIdList.push(stock["id"])
+          })
+
+          var data = await NewsService.addBucket(this.stockCase, stockIdList, "f451db8f-8b23-11ea-8f60-02d8ff8d84a6")
+
+          console.log(data.result + "addBucket")
 
       }
     },

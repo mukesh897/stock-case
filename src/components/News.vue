@@ -16,8 +16,27 @@
                     </news-clip>
                     
                 </b-tab>
-                <b-tab class="tab-text" title="Positive"><p>I'm the second tab</p></b-tab>
-                <b-tab class="tab-text" title="Negative"><p>I'm a disabled tab!</p></b-tab>
+                <b-tab class="tab-text" title="Positive">
+                    <news-clip v-for="(news, index) in positiveNews"
+                    :key="index"
+                    :title="news.title"
+                    :description="news.description"
+                    :url="news.urlToImage"
+                    :time="news.publishedAt"
+                    :link="news.url">
+                    </news-clip>
+                    
+                </b-tab>
+                <b-tab class="tab-text" title="Negative">
+                    <news-clip v-for="(news, index) in negativeNews"
+                    :key="index"
+                    :title="news.title"
+                    :description="news.description"
+                    :url="news.urlToImage"
+                    :time="news.publishedAt"
+                    :link="news.url">
+                    </news-clip>
+                </b-tab>
             </b-tabs>
             </div>
        </div>
@@ -33,7 +52,7 @@ components: {
     NewsClip,
     news: []
 },
- computed: mapGetters(['news']),
+ computed: mapGetters(['news','positiveNews','negativeNews']),
   watch: {
     news(newValue, oldValue) {
       console.log(`Updating from ${oldValue} to ${newValue}`);
@@ -59,6 +78,7 @@ components: {
     font-family: MarkPro;
     font-size: 22.5px;
     font-weight: 500;
+    opacity: 0.6;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.27;

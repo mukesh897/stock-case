@@ -129,6 +129,12 @@ export const store = new Vuex.Store({
         },
         news(state) {
             return state.news;
+        },
+        positiveNews: state => {
+            return state.news.filter(news => (news.sentiment > 0))
+        },
+        negativeNews: state => {
+            return state.news.filter(news => (news.sentiment < 0))
         }
     }    
 })
