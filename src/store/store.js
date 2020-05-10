@@ -1,8 +1,9 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import NewsService from '../NewsService';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import NewsService from '../NewsService'
+import graphService from '../services/graphService'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 function initialState() {
     return {
@@ -17,7 +18,7 @@ function initialState() {
             },
         ],
         news: [],
-
+        graphData: {}
     }
 }
 
@@ -31,15 +32,15 @@ export const store = new Vuex.Store({
             hasOverlay,
             data
         }) {
-            var index = -1;
-            for (var i = 0; i < state.modals.length; i++) {
-                var item = state.modals[i];
+            let index = -1
+            for (let i = 0; i < state.modals.length; i++) {
+                let item = state.modals[i]
                 if (item.name === name) {
-                    index = i;
+                    index = i
                     break;
                 }
             }
-            var element = {};
+            let element = {};
             if (hasOverlay)
                 element = {
                     name: name,
@@ -54,26 +55,29 @@ export const store = new Vuex.Store({
                     data: {}
                 };
             if (index != -1) {
-                state.modals[index].show = show;
-                element.show = show;
+                state.modals[index].show = show
+                element.show = show
                 if (hasOverlay != null) {
-                    state.modals[index].hasOverlay = hasOverlay;
-                    element.hasOverlay = hasOverlay;
+                    state.modals[index].hasOverlay = hasOverlay
+                    element.hasOverlay = hasOverlay
                 }
                 if (data != null) {
-                    element.data = data;
+                    element.data = data
                 }
                 if (data)
                     Vue.set(state.modals, index, element)
             }
         },
         setNews(state, news) {
-            state.news = news;
+            state.news = news
         },
+        setGraphData(state, graphData) {
+            state.graphData = graphData
+        }
     },
     actions: {
         setNews({commit}, news) {
-            commit("setNews", news);
+            commit("setNews", news)
         },
         showModal({
             commit
@@ -108,27 +112,35 @@ export const store = new Vuex.Store({
         },
         async fetchNews({dispatch},news) {
             try {
-              var response = (await NewsService.getStockData(news));
-              dispatch("setNews", response.result);
+              let response = (await NewsService.getStockData(news))
+              dispatch("setNews", response.result)
             } catch (error) {
-              dispatch("setNews", []);
+              dispatch("setNews", [])
             }
         },
+        async fetchGraphData({dispatch}, symbol, interval) {
+            try {
+                const response = await graphService.getGraphData(symbol, interval)
+                dispatch('setGraphData', response)
+            } catch (error) {
+                dispatch("fetchGraphData", [])
+            }
+        }
     },
     getters: {
         //This is not working, it is returning the correct object but not able to typecast
         getModalShowState(state) {
           return function(name) {
-            for (var i = 0; i < state.modals.length; i++) {
-              var item = state.modals[i];
+            for (let i = 0; i < state.modals.length; i++) {
+              let item = state.modals[i]
               if (item.name === name) {
-                return item;
+                return item
               }
             }
-          };
+          }
         },
         news(state) {
-            return state.news;
+            return state.news
         },
         positiveNews: state => {
             return state.news.filter(news => (news.sentiment > 0))

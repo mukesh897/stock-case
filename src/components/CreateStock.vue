@@ -237,7 +237,7 @@ export default {
     }
 </style>
 
-<style>
+<style scoped>
  .v-input__slot {
     border-radius: 10.5px !important;
     border: solid 0.5px #707070 !important;
