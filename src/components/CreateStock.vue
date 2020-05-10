@@ -2,7 +2,7 @@
   <div>
       <div class="card-wrap">
         <div class="title-wrapper">
-          <div class="Create-stockcase">Create Stockcase</div>
+          <div class="Create-stockcase">Create  <input v-model="stockCase"><div class="under-line"></div></div>
           <div style="width: 30%; float: right;">
             <v-autocomplete
               v-model="select"
@@ -30,12 +30,35 @@
             </p>
           </div>
         </div>
+        <div v-else style="max-height:250px; overflow-y: scroll;">
+          <table>
+            <thead style="margin-bottom: 10px; border-bottom: 1px solid #514abf;">
+              <th style="width: 40%; text-align: left !important;">Stock</th>
+              <th>Price $</th>
+              <th>Change 24 hr</th>
+              <th>Sentiment</th>
+            </thead>
+            <tbody>
+              <tr v-for="(item, index) in bucket"
+              :key="index">
+                <td style="width: 40%; text-align: left !important; color: #514abf;">{{bucket[index].companyName}}</td>
+                <td>{{bucket[index].latestPrice}}</td>
+                <td>{{bucket[index].change}}</td>
+                <td @click="deleteRow(index)">x</td>
+               </tr> 
+            </tbody>
+          </table>
+          <div style="text-align: center">
+            <button class="cta" @click="createBucket">CREATE</button>
+          </div>
+        </div>
       </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
+import NewsService from '../NewsService';
 export default {
   name: 'CreateStock',
   data () {
@@ -45,23 +68,9 @@ export default {
         zeroState: true,
         search: null,
         select: null,
-        stocks: [
-          {
-              "name": "Facebook Inc. Class A",
-              "symbol": "FB",
-              "exchange": "NAS"
-          },
-          {
-              "name": "Surface Oncology Inc.",
-              "symbol": "SURF",
-              "exchange": "NAS"
-          },
-          {
-              "name": "Interface Inc.",
-              "symbol": "TILE",
-              "exchange": "NAS"
-          }
-      ],
+        bucket: [],
+        stockCase: "stockcase",
+        stocks: [],
       }
     },
     watch: {
@@ -70,9 +79,19 @@ export default {
         if(placeholder == true){
           return placeholder
         } else {
-          await this.$store.dispatch("fetchNews",this.select);
+          let symbol = ""
+          this.stocks.forEach((stock)=> {
+            if(stock["name"] == this.select) {
+              symbol = stock["symbol"]
+            }
+          })
+          let data = await NewsService.getStockPrice(symbol);
+          await this.$store.dispatch("fetchNews",symbol); 
+          console.log(data.result + "result")
+          this.bucket.push(data.result);
+          console.log("Printing bucker")
+          console.log(this.bucket)
         }
-
       },
     },
     // computed: {
@@ -81,11 +100,11 @@ export default {
     //   }),
     // },
     methods: {
-      querySelections (v) {
+      async querySelections (v) {
+        this.zeroState = false;
         this.loading = true
-        this.zeroState = !this.zeroState;
-
-        // Simulated ajax query
+        var data2 = await NewsService.searchStocks(v)
+        this.stocks = data2.result
         setTimeout(() => {
           let stockNamesList = [];
           this.stocks.forEach(stock => {
@@ -97,12 +116,53 @@ export default {
           this.loading = false
         }, 500)
       },
+      async createBucket() {
+        let stockIdList = [];
+          this.stocks.forEach(stock => {
+            stockIdList.push(stock["id"])
+          })
+          this.$router.push ({name:'dashboard',params: {symbol: this.bucket[0].symbol}})
+          var data = await NewsService.addBucket(this.stockCase, stockIdList, "f451db8f-8b23-11ea-8f60-02d8ff8d84a6")
+          console.log(data.result + "addBucket")
+          
+      },
+      deleteRow(index) {
+        this.bucket.splice(index,1);
+      }
     },
+     mounted: {
+      async setNews() {
+        await this.$store.dispatch("fetchNews", "Facebook Inc. Class A")
+      }
+     }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    .cta {
+      width: 136px;
+      height: 38.5px;
+      border-radius: 5px;
+      color: #ffffff;
+      font-family: MarkPro;
+      background-color: #34d1bf;
+    }
+    .line {
+      box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
+      background-color: #514abf;;
+      height: 2px;
+      margin: 10px auto;
+      width: 90%;
+    }
+    .under-line {
+      height: 2px;
+      width: 35%;
+      margin-left: 25%;
+      border-radius: 5px;
+      box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
+      background-color: #1e2029;;
+    }
     .card-wrap {
       height: 360px;
       border-radius: 5px;
@@ -144,6 +204,36 @@ export default {
       letter-spacing: normal;
       text-align: left;
       color: #ffffff;
+    }
+    table {
+      width: 90%;
+      margin: 50px auto;
+    }
+    th {
+      opacity: 0.75;
+      font-family: MarkPro;
+      font-size: 20px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.28;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+    td {
+      font-family: MarkPro;
+      font-size: 20px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.28;
+      letter-spacing: normal;
+      text-align: center;
+      color: #ffffff;
+    }
+    tr {
+      height: 60px;
     }
 </style>
 

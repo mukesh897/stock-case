@@ -24,7 +24,7 @@ Vue.component('apexchart', VueApexCharts)
 
 const routes = [
   { path: '/', component: Index},
-  {path:'/dashboard',component: Dashboard}
+  {path:'/dashboard',component: Dashboard, name:"dashboard"}
 ];
 
 const router = new Router({

@@ -15,7 +15,8 @@ function initialState() {
                 name: "loginModal",
                 show: false
             },
-        ]
+        ],
+        news: [],
 
     }
 }
@@ -23,7 +24,6 @@ function initialState() {
 export const store = new Vuex.Store({
     strict: true,
     state: initialState(),
-    news: [],
     mutations: {
         showModal(state, {
             name,
@@ -127,5 +127,14 @@ export const store = new Vuex.Store({
             }
           };
         },
+        news(state) {
+            return state.news;
+        },
+        positiveNews: state => {
+            return state.news.filter(news => (news.sentiment > 0))
+        },
+        negativeNews: state => {
+            return state.news.filter(news => (news.sentiment < 0))
+        }
     }    
 })
