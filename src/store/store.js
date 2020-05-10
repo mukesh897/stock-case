@@ -114,6 +114,14 @@ export const store = new Vuex.Store({
               dispatch("setNews", []);
             }
         },
+        async fetchBucketNews({dispatch},id) {
+            try {
+              var response = (await NewsService.getBucketNews(news));
+              dispatch("setNews", response.result);
+            } catch (error) {
+              dispatch("setNews", []);
+            }
+        },
     },
     getters: {
         //This is not working, it is returning the correct object but not able to typecast

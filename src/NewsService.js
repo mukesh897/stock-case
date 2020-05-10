@@ -19,6 +19,18 @@ export default {
     });
     return res.data;
   },
+  async getBucketNews(id) {
+    let res = await axios.post("http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/getBucketNews",{
+      "bucket_id": id
+    });
+    return res.data;
+  },
+  async getBuckets(id) {
+    let res = await axios.post("http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/getBuckets",{
+      "user_id": id
+    });
+    return res.data;
+  },
   async addBucket(stockCase,data,user_id) {
     let res = await axios.post("http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/addBucket",{
       "bucket_name": stockCase,

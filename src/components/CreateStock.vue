@@ -19,9 +19,9 @@
           ></v-autocomplete>
           </div>
         </div>
-        <div v-if="zeroState == true" class="">
+        <div v-if="zeroState == true" style="display: flex">
           <div class=""> 
-            
+            <img style="height: 24%; margin-left: 30%;" src="../assets/images/group_119.png">
           </div>
           <div class="zero-text-wrap">
             <p class="zero-state-text">
@@ -36,7 +36,7 @@
               <th style="width: 40%; text-align: left !important;">Stock</th>
               <th>Price $</th>
               <th>Change 24 hr</th>
-              <th>Sentiment</th>
+              <th>Remove</th>
             </thead>
             <tbody>
               <tr v-for="(item, index) in bucket"
@@ -86,7 +86,7 @@ export default {
             }
           })
           let data = await NewsService.getStockPrice(symbol);
-          await this.$store.dispatch("fetchNews",symbol); 
+          await this.$store.dispatch("fetchNews",symbol);
           console.log(data.result + "result")
           this.bucket.push(data.result);
           console.log("Printing bucker")

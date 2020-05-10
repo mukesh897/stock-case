@@ -4,19 +4,20 @@
            <div style="display: flex; margin-top: 60px;">
                <div class="news-heading news-title">NEWS:</div>
             <b-tabs  v-model="tabIndex" content-class="mt-3">
-                
-                <b-tab :title-link-class="linkClass(0)" id="tab-1" title="General" active>
-                    <news-clip v-for="(news, index) in news"
-                    :key="index"
-                    :title="news.title"
-                    :description="news.description"
-                    :url="news.urlToImage"
-                    :time="news.publishedAt"
-                    :link="news.url">
-                    </news-clip>
-                    
-                </b-tab>
-                <b-tab :title-link-class="linkClass(1)" class="tab-text" title="Positive">
+                <div class="scroll">
+                    <b-tab class="tab-text" :title-link-class="linkClass(0)" id="tab-1" title="General" active>
+                        <news-clip v-for="(news, index) in news"
+                        :key="index"
+                        :title="news.title"
+                        :description="news.description"
+                        :url="news.urlToImage"
+                        :time="news.publishedAt"
+                        :link="news.url">
+                        </news-clip>    
+                    </b-tab>
+                </div>
+                <div class="scroll">
+                <b-tab class="tab-text" :title-link-class="linkClass(1)" title="Positive">
                     <news-clip v-for="(news, index) in positiveNews"
                     :key="index"
                     :title="news.title"
@@ -24,19 +25,21 @@
                     :url="news.urlToImage"
                     :time="news.publishedAt"
                     :link="news.url">
-                    </news-clip>
-                    
+                    </news-clip>   
                 </b-tab>
-                <b-tab  :title-link-class="linkClass(2)" class="tab-text" title="Negative">
-                    <news-clip v-for="(news, index) in negativeNews"
-                    :key="index"
-                    :title="news.title"
-                    :description="news.description"
-                    :url="news.urlToImage"
-                    :time="news.publishedAt"
-                    :link="news.url">
-                    </news-clip>
-                </b-tab>
+                </div>
+                <div class="scroll">
+                    <b-tab  class="tab-text" :title-link-class="linkClass(2)" title="Negative">
+                        <news-clip v-for="(news, index) in negativeNews"
+                        :key="index"
+                        :title="news.title"
+                        :description="news.description"
+                        :url="news.urlToImage"
+                        :time="news.publishedAt"
+                        :link="news.url">
+                        </news-clip>
+                    </b-tab>
+                </div>    
             </b-tabs>
             </div>
        </div>
@@ -57,12 +60,12 @@ components: {
     NewsClip,
     news: []
 },
- computed: mapGetters(['news','positiveNews','negativeNews']),
+computed: mapGetters(['news','positiveNews','negativeNews']),
   watch: {
     news(newValue, oldValue) {
       console.log(`Updating from ${oldValue} to ${newValue}`);
     }, 
-  },
+},
   methods: {
       linkClass(i) {
       if (this.tabIndex === 1) {
@@ -79,6 +82,11 @@ components: {
 </script>
 
 <style>
+/* .scroll {
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x:auto;
+} */
 .news-wrap-content {
     box-shadow: -2.5px -2.5px 2.5px 0 rgba(68, 63, 153, 0.07);
     background-color: #1e2029;

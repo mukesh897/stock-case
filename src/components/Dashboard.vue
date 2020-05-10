@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="news-wrap">
-      <news></news>
+      <news class="scroll"></news>
     </div>
     <div class="footer-wrap">
       <Footer class="footer"></Footer>
@@ -41,6 +41,9 @@ export default {
     print() {
       console.log(this.$router.params.symbol + "dash symbol");
     }
+  },
+  mounted() {
+    this.$store.dispatch("fetchNews","general")
   }
 }
 </script>
@@ -52,6 +55,12 @@ export default {
     height: 100%;
     background-color: #1e2029;
     padding-bottom: 80px;
+  }
+
+  .scroll {
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x:auto;
   }
 
   .header-wrap_index {

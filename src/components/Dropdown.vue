@@ -2,13 +2,53 @@
     <div class="card-wrap">
         <div>
         <b-dropdown style=" width: 100%;" id="dropdown-1" text="Stockcase" class="m-md-2">
-            <b-dropdown-item>potfolio</b-dropdown-item>
-            <b-dropdown-item>Social Giants</b-dropdown-item>
-            <b-dropdown-item>Stockcase</b-dropdown-item>
+            <b-dropdown-item  v-for="(item,index) in bucketList"
+            :key="index"><span @click="updateList(index)">{{item.bucket_name}}</span></b-dropdown-item>
         </b-dropdown>
+        <div>
+            <ul>
+                <li v-for="(item, index) in bucketStockList"
+                    :key="index">
+                    {{item.name}}
+                </li>
+
+            </ul>
+        </div>
         </div>
     </div>
 </template>
+
+<script>
+import NewsService from '../NewsService'
+
+    export default {
+        data() {
+            return {
+                bucketList: [],
+                bucketStockList: [],
+            }
+        },
+        async mounted() {
+            try{
+                var data = await NewsService.getBuckets("f451db8f-8b23-11ea-8f60-02d8ff8d84a6");
+                this.bucketList = data.bucket;
+                setInterval(this.updateTime, 1000);
+            } catch (error) {
+                console.log(error);
+                this.$router.push('/');
+            }
+        },
+        methods: {
+            async updateList(index) {
+                this.bucketStockList = []
+                this.bucketStockList = this.bucketList[index].bucket_stocks
+
+                await this.$store.dispatch("fetchBucketNews",this.bucketList[index].bucket_id);
+
+            }
+        }
+    }
+</script>
 
 
 
