@@ -3,7 +3,7 @@
         <div class="col-lg-8" style="padding: 15px;">
             <div style="display: flex; justify-content: space-between;">
                 <div style="width: 90%;" class="news-heading"> {{title}}</div>
-                <div style="white-space: nowrap; text-align: right !important" class="news-sub-heading"> {{getTime}} </div>
+                <div style="white-space: nowrap; opacity: 0.6; text-align: right !important" class="news-sub-heading"> {{getTime}} </div>
             </div>
             <p class="news-sub-heading mt-cus-17"> {{description}}</p>
         </div>
