@@ -36,6 +36,11 @@ export default {
     Dropdown,
     News,
     Footer
+  },
+  created: {
+    print() {
+      console.log(this.$router.params.symbol + "dash symbol");
+    }
   }
 }
 </script>

@@ -121,11 +121,10 @@ export default {
           this.stocks.forEach(stock => {
             stockIdList.push(stock["id"])
           })
-
+          this.$router.push ({name:'dashboard',params: {symbol: this.bucket[0].symbol}})
           var data = await NewsService.addBucket(this.stockCase, stockIdList, "f451db8f-8b23-11ea-8f60-02d8ff8d84a6")
-
           console.log(data.result + "addBucket")
-
+          
       },
       deleteRow(index) {
         this.bucket.splice(index,1);
