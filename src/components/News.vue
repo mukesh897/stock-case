@@ -3,9 +3,9 @@
        <div>
            <div style="display: flex; margin-top: 60px;">
                <div class="news-heading news-title">NEWS:</div>
-            <b-tabs content-class="mt-3">
+            <b-tabs  v-model="tabIndex" content-class="mt-3">
                 
-                <b-tab id="tab-1" title="General" active>
+                <b-tab :title-link-class="linkClass(0)" id="tab-1" title="General" active>
                     <news-clip v-for="(news, index) in news"
                     :key="index"
                     :title="news.title"
@@ -16,7 +16,7 @@
                     </news-clip>
                     
                 </b-tab>
-                <b-tab class="tab-text" title="Positive">
+                <b-tab :title-link-class="linkClass(1)" class="tab-text" title="Positive">
                     <news-clip v-for="(news, index) in positiveNews"
                     :key="index"
                     :title="news.title"
@@ -27,7 +27,7 @@
                     </news-clip>
                     
                 </b-tab>
-                <b-tab class="tab-text" title="Negative">
+                <b-tab  :title-link-class="linkClass(2)" class="tab-text" title="Negative">
                     <news-clip v-for="(news, index) in negativeNews"
                     :key="index"
                     :title="news.title"
@@ -48,6 +48,11 @@ import { mapGetters } from 'vuex';
 import NewsClip from './NewsClip';
 export default {
 name: 'News', 
+data() {
+    return {
+      tabIndex: 0,
+    }
+},      
 components: {
     NewsClip,
     news: []
@@ -57,7 +62,18 @@ components: {
     news(newValue, oldValue) {
       console.log(`Updating from ${oldValue} to ${newValue}`);
     }, 
-  },  
+  },
+  methods: {
+      linkClass(i) {
+      if (this.tabIndex === 1) {
+        return ['tab-1']
+      } else if(this.tabIndex === 2){
+        return ['tab-2']
+      } else {
+          return ['tabs-3']
+      }
+    }
+  }
 
 }
 </script>
@@ -72,6 +88,17 @@ components: {
 
 .tab-under-a {
     border-bottom: #ffffff;
+}
+
+.tab-1 {
+    border-bottom: 2px solid purple;
+}
+
+.tab-2 {
+    border-bottom: 2px solid green;
+}
+.tab-3 {
+     border-bottom: 2px solid red;
 }
 
 .news-heading {
@@ -121,6 +148,7 @@ components: {
     opacity: 0.2;
 }
 
+
 .nav-tabs .nav-link.active {
     color: #ffffff;
     background-color: transparent;
@@ -135,8 +163,5 @@ components: {
 }
 .mt-cus-17 {
     margin-top: 17px;
-}
-#tab-1 .ul .li {
-    border-bottom: 2px solid red !important;
 }
 </style>

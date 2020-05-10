@@ -51,6 +51,9 @@ export default {
             hours = Math.trunc(convertDate)%24;
             convertDate = convertDate/24;
             days = parseInt(convertDate);
+            if(hours < 1) {
+                return minutes+ "mins"
+            }
             if (days < 1) {
                 return hours+" h"
             } else {
