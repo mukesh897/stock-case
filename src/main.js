@@ -15,6 +15,8 @@ import Dashboard from "./components/Dashboard.vue";
 import './main.css'
 import vuetify from './plugins/vuetify';
 
+
+
 Vue.use(BootstrapVue)
 
 Vue.use(Vuetify)

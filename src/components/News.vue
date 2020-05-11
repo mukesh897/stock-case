@@ -10,9 +10,9 @@
                         :key="index"
                         :title="news.title"
                         :description="news.description"
-                        :url="news.urlToImage"
-                        :time="news.publishedAt"
-                        :link="news.url">
+                        :url="news.image_url"
+                        :time="news.date"
+                        :link="news.news_url">
                         </news-clip>    
                     </b-tab>
                 </div>
@@ -22,9 +22,9 @@
                     :key="index"
                     :title="news.title"
                     :description="news.description"
-                    :url="news.urlToImage"
-                    :time="news.publishedAt"
-                    :link="news.url">
+                    :url="news.image_url"
+                    :time="news.date"
+                    :link="news.news_url">
                     </news-clip>   
                 </b-tab>
                 </div>
@@ -34,9 +34,9 @@
                         :key="index"
                         :title="news.title"
                         :description="news.description"
-                        :url="news.urlToImage"
-                        :time="news.publishedAt"
-                        :link="news.url">
+                        :url="news.image_url"
+                        :time="news.date"
+                        :link="news.news_url">
                         </news-clip>
                     </b-tab>
                 </div>    
@@ -160,7 +160,6 @@ computed: mapGetters(['news','positiveNews','negativeNews']),
 .nav-tabs .nav-link.active {
     color: #ffffff;
     background-color: transparent;
-    border: 0px;
     font-family: MarkPro;
     font-size: 31px;
     font-weight: 500;

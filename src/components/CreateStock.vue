@@ -2,7 +2,8 @@
   <div>
       <div class="card-wrap">
         <div class="title-wrapper">
-          <div class="Create-stockcase">Create  <input v-model="stockCase"><div class="under-line"></div></div>
+          <div class="Create-stockcase">Create  <input style="opacity: 0.5; width: 123px;" v-model="stockCase"><img style="margin-bottom: 2px;
+    height: 24px;" src="https://img.icons8.com/material-two-tone/24/000000/edit.png"/><div class="under-line"></div></div>
           <div style="width: 30%; float: right;">
             <v-autocomplete
               v-model="select"
@@ -20,8 +21,8 @@
           </div>
         </div>
         <div v-if="zeroState == true" style="display: flex">
-          <div class=""> 
-            <img style="height: 24%; margin-left: 30%;" src="../assets/images/group_119.png">
+          <div style="width: 30%;"> 
+            <img style="height: 24%; margin-left: 70px;" src="../assets/images/group_119.png">
           </div>
           <div class="zero-text-wrap">
             <p class="zero-state-text">
@@ -157,8 +158,8 @@ export default {
     }
     .under-line {
       height: 2px;
-      width: 35%;
-      margin-left: 25%;
+      width: 51%;
+      margin-left: 39%;
       border-radius: 5px;
       box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
       background-color: #1e2029;;

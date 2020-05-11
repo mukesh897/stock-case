@@ -3,17 +3,35 @@
     <div class="faq-title">
         Frequently Asked Questions
     </div>
-    <div style="margin-top: 40px">
-    <div v-b-toggle.collapse-1 class="faq-ques-title">What is stockcase?</div>
-    <b-collapse id="collapse-1" class="mt-2">
-        <p class="faq-answer-title">A stockcase is a basket of exchange traded securities  in a specified weighting scheme
-            to reflect a certain objective (ideas, themes, strategies). A stockcase has a minimum
-            of 2 securities and a maximum of 50 securities.</p>
-    </b-collapse>
+    <div style="margin-top: 40px" v-for="(item, index) in faqs"
+    :key="index" >
+    <div v-b-toggle.collapse :href="'#collapse-'+index" style="display: flex; justify-content: space-between;">
+        <div class="faq-ques-title">{{item.ques}}</div>
+        <div><img src="https://img.icons8.com/android/24/000000/plus.png"/></div>
     </div>
+    <b-collapse id="collapse" class="mt-2">
+        <p class="faq-answer-title">{{item.ans}}</p>
+    </b-collapse>
     <div class="line"></div>
     </div>
+    </div>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                faqs: [
+                    {ques: "What is stockcase?",ans: "become a more informed and confident investor."},
+                    {ques: "Why should I create a stockcase?", ans: "Why should I create a stockcase?"},
+                    {ques:"How is the news segregated to General, Positive and Negative?", ans: "We read the sentiment presented in the news article and segregate into the appropriate section so that it becomes really easy for you to get a context to what news you're reading, We use a magic spell to segregate the news into General, Positive, and Negative."},
+                    {ques: "Which Exchanges are available on stockcase?", ans: "On Stockcase, we have NASDAQ and NYSE from United States and NSE and BSE from India"},
+                    {ques:"Can I buy the stockcase that I create?", ans: "Right now, we don't offer the service where you could Buy and Sell the portfolio of stocks that you create but in the future, we are working towards it."}
+                ]
+            }
+        }
+    }
+</script>
 
 <style scoped>
     .line {
