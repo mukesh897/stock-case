@@ -5,7 +5,7 @@
     </div>
     <div style="margin-top: 40px" v-for="(item, index) in faqs"
     :key="index" >
-    <div v-b-toggle.collapse :href="'#collapse-'+index" style="display: flex; justify-content: space-between;">
+    <div v-b-toggle.collapse style="display: flex; justify-content: space-between;">
         <div class="faq-ques-title">{{item.ques}}</div>
         <div><img src="https://img.icons8.com/android/24/000000/plus.png"/></div>
     </div>
