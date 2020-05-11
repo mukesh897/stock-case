@@ -113,7 +113,15 @@ export const store = new Vuex.Store({
         async fetchNews({dispatch},news) {
             try {
               let response = (await NewsService.getStockData(news))
-              dispatch("setNews", response.result)
+              dispatch("setNews", response.result.data);
+            } catch (error) {
+              dispatch("setNews", []);
+            }
+        },
+        async fetchBucketNews({dispatch},news) {
+            try {
+              var response = (await NewsService.getBucketNews(news));
+              dispatch("setNews", response.result.data)
             } catch (error) {
               dispatch("setNews", [])
             }
@@ -141,12 +149,13 @@ export const store = new Vuex.Store({
         },
         news(state) {
             return state.news
+            return state.news.filter(news => (news.sentiments === 0))
         },
         positiveNews: state => {
-            return state.news.filter(news => (news.sentiment > 0))
+            return state.news.filter(news => (news.sentiments > 0))
         },
         negativeNews: state => {
-            return state.news.filter(news => (news.sentiment < 0))
+            return state.news.filter(news => (news.sentiments < 0))
         }
     }    
 })

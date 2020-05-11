@@ -2,7 +2,7 @@ import axios from "axios"
 
 export default {
   async getStockData(placeholder) {
-    let res = await axios.post("http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/getStockData",{
+    let res = await axios.post("http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/getStockNews",{
         "query": placeholder
     });
     return res.data;
@@ -16,6 +16,18 @@ export default {
   async searchStocks(v) {
     let res = await axios.post("http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/searchStocks",{
       "query": v
+    });
+    return res.data;
+  },
+  async getBucketNews(id) {
+    let res = await axios.post("http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/getBucketNews",{
+      "bucket_id": id
+    });
+    return res.data;
+  },
+  async getBuckets(id) {
+    let res = await axios.post("http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/getBuckets",{
+      "user_id": id
     });
     return res.data;
   },

@@ -7,7 +7,7 @@
       <Create-Stock></Create-Stock>
     </div>
     <div class="news-wrap">
-      <news></news>
+      <news class="scroll"></news>
     </div>
     <div class="faq-wrap">
     <Faqs></Faqs>
@@ -32,6 +32,9 @@ export default {
     News,
     Footer,
     Faqs
+  },
+  async mounted() {
+    await this.$store.dispatch("fetchNews","general")
   }
 }
 </script>
@@ -44,6 +47,12 @@ export default {
     background-color: #1e2029;
     padding-bottom: 80px;
   }
+
+  .scroll {
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x:auto;
+}
 
   .header-wrap_index {
     width: 80%;
@@ -79,6 +88,8 @@ export default {
     width: 80%;
     margin-top: 48px;
     margin: auto;
+    height: 450px;
+    overflow-y: scroll;
   }
 
 </style>
