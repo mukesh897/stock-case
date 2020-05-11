@@ -41,6 +41,7 @@ import NewsService from '../NewsService'
                 var data = await NewsService.getBuckets("f451db8f-8b23-11ea-8f60-02d8ff8d84a6");
                 this.bucketList = data.bucket;
                 this.placeholder = this.bucketList[0].bucket_name
+                this.bucketStockList = this.bucketList[0].bucket_stocks
                 setInterval(this.updateTime, 1000);
             } catch (error) {
                 console.log(error);
