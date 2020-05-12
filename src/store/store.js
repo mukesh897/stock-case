@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import NewsService from '../NewsService'
 import graphService from '../services/graphService'
+import authService from "../services/authService";
 
 Vue.use(Vuex)
 
@@ -75,18 +76,33 @@ export const store = new Vuex.Store({
     },
     setGraphData(state, graphData) {
       state.graphData = graphData
+    },
+    setIsUserLoggedIn(state, flag) {
+      state.isUserLoggedIn = flag
+    },
+    setUserId(state, userId) {
+      state.userId = userId
     }
   },
   actions: {
     setNews({commit}, news) {
       commit("setNews", news)
     },
+    setGraphData({ commit }, graphData) {
+      commit('setGraphData', graphData)
+    },
+    setIsUserLoggedIn({ commit }, flag) {
+      commit('setIsUserLoggedIn', flag)
+    },
+    setUserId({ commit }, userId) {
+      commit('setUserId', userId)
+    },
     showModal({ commit }, name) {
       commit('showModal', {
         name: name,
         show: true,
         hasOverlay: true
-      });
+      })
     },
     showModalWithOptions({ commit }, { name, hasOverlay, data }) {
       commit('showModal', {
@@ -94,17 +110,15 @@ export const store = new Vuex.Store({
         show: true,
         hasOverlay: hasOverlay,
         data: data
-      });
+      })
     },
-    hideModal({
-                commit
-              }, name) {
+    hideModal({ commit }, name) {
       commit('showModal', {
         name: name,
         show: false
-      });
+      })
     },
-    async fetchNews({dispatch},news) {
+    async fetchNews({ dispatch },news) {
       try {
         let response = (await NewsService.getStockData(news))
         dispatch('setNews', response.result.data)
@@ -112,7 +126,7 @@ export const store = new Vuex.Store({
         dispatch('setNews', [])
       }
     },
-    async fetchBucketNews({dispatch},news) {
+    async fetchBucketNews({ dispatch },news) {
       try {
         let response = (await NewsService.getBucketNews(news))
         dispatch('setNews', response.result.data)
@@ -120,12 +134,44 @@ export const store = new Vuex.Store({
         dispatch('setNews', [])
       }
     },
-    async fetchGraphData({dispatch}, symbol, interval) {
+    async fetchGraphData({ dispatch }, symbol, interval) {
       try {
         const response = await graphService.getGraphData(symbol, interval)
         dispatch('setGraphData', response)
       } catch (error) {
-        dispatch('fetchGraphData', [])
+        dispatch('setGraphData', {})
+      }
+    },
+    async callUserLogin({ dispatch }, { email, password }) {
+      try {
+        const response = await authService.userLogin(email, password)
+        if (!response) {
+          dispatch('setIsUserLoggedIn', false)
+          dispatch('setUserId', '')
+        } else {
+          dispatch('setIsUserLoggedIn', true)
+          dispatch('setUserId', response)
+        }
+      } catch (error) {
+        dispatch('setIsUserLoggedIn', false)
+        dispatch('setUserId', '')
+        console.error(error)
+      }
+    },
+    async callUserSignUp({ dispatch }, { firstName, lastName, email, password }) {
+      try {
+        const response = await authService.userSignUp(firstName, lastName, email, password)
+        if (!response) {
+          dispatch('setIsUserLoggedIn', false)
+          dispatch('setUserId', '')
+        } else {
+          dispatch('setIsUserLoggedIn', true)
+          dispatch('setUserId', response)
+        }
+      } catch (error) {
+        dispatch('setIsUserLoggedIn', false)
+        dispatch('setUserId', '')
+        console.error(error)
       }
     }
   },
@@ -142,7 +188,6 @@ export const store = new Vuex.Store({
       }
     },
     news(state) {
-      return state.news
       return state.news.filter(news => (news.sentiments === 0))
     },
     positiveNews: state => {
@@ -153,6 +198,9 @@ export const store = new Vuex.Store({
     },
     userLoginStatus(state) {
       return state.isUserLoggedIn
+    },
+    userId(state) {
+      return state.userId
     }
   }
 })

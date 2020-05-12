@@ -53,7 +53,6 @@ import { Vue, Component } from 'vue-property-decorator'
 import axios from 'axios'
 import CryptoJS from 'crypto-js'
 
-Vue.component(GoogleLogin)
 
 @Component
 class loginModal extends Vue {
