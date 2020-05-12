@@ -3,9 +3,9 @@
        <div>
            <div style="display: flex;">
                <div class="news-heading news-title">NEWS:</div>
-            <b-tabs  v-model="tabIndex" content-class="mt-3">
+            <b-tabs v-model="tabIndex" content-class="mt-3">
                 <div class="scroll">
-                    <b-tab class="tab-text" :title-link-class="linkClass(0)" id="tab-1" title="General" active>
+                    <b-tab class="tab-text" id="tab-1" title="General" active>
                         <news-clip v-for="(news, index) in news"
                         :key="index"
                         :title="news.title"
@@ -17,7 +17,7 @@
                     </b-tab>
                 </div>
                 <div class="scroll">
-                <b-tab class="tab-text" :title-link-class="linkClass(1)" title="Positive">
+                <b-tab class="tab-text" title="Positive">
                     <news-clip v-for="(news, index) in positiveNews"
                     :key="index"
                     :title="news.title"
@@ -29,7 +29,7 @@
                 </b-tab>
                 </div>
                 <div class="scroll">
-                    <b-tab  class="tab-text" :title-link-class="linkClass(2)" title="Negative">
+                    <b-tab  class="tab-text" title="Negative">
                         <news-clip v-for="(news, index) in negativeNews"
                         :key="index"
                         :title="news.title"
@@ -88,7 +88,15 @@ computed: mapGetters(['news','positiveNews','negativeNews']),
     overflow-x:auto;
     width: 150%;
 } */
-
+#tab-1___BV_tab_button__ {
+    border-bottom: 2px solid purple !important;
+}
+#__BVID__20___BV_tab_button__{
+    border-bottom: 2px solid green !important;
+}
+#__BVID__22___BV_tab_button__ {
+    border-bottom: 2px solid red !important;
+}
 .news-wrap-content {
     box-shadow: -2.5px -2.5px 2.5px 0 rgba(68, 63, 153, 0.07);
     background-color: #1e2029;
@@ -98,17 +106,6 @@ computed: mapGetters(['news','positiveNews','negativeNews']),
 
 .tab-under-a {
     border-bottom: #ffffff;
-}
-
-.tab-1 {
-    border-bottom: 2px solid purple;
-}
-
-.tab-2 {
-    border-bottom: 2px solid green;
-}
-.tab-3 {
-     border-bottom: 2px solid red;
 }
 
 .news-heading {
