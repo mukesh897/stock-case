@@ -24,11 +24,12 @@ export default {
     subHeading: String,
     content: String,
     url: String,
-    source: String
+    source: String,
+    link: String
   },
   methods: {
     redirect() {
-      window.location = 'https://google.com'
+      window.location = (this.link,'_blank')
     }
   }
 };
