@@ -8,11 +8,12 @@
                     <b-tab class="tab-text" id="tab-1" title="General" active>
                         <news-clip v-for="(news, index) in news"
                         :key="index"
-                        :title="news.title"
-                        :description="news.description"
-                        :url="news.image_url"
-                        :time="news.date"
-                        :link="news.news_url">
+                        :title="news.headline"
+                        :description="news.summary"
+                        :url="news.image"
+                        :time="news.datetime"
+                        :link="news.url"
+                        :source="news.source">
                         </news-clip>    
                     </b-tab>
                 </div>
@@ -20,11 +21,12 @@
                 <b-tab class="tab-text" title="Positive">
                     <news-clip v-for="(news, index) in positiveNews"
                     :key="index"
-                    :title="news.title"
-                    :description="news.description"
-                    :url="news.image_url"
-                    :time="news.date"
-                    :link="news.news_url">
+                    :title="news.headline"
+                    :description="news.summary"
+                    :url="news.image"
+                    :time="news.datetime"
+                    :link="news.url"
+                    :source="news.source">
                     </news-clip>   
                 </b-tab>
                 </div>
@@ -32,11 +34,12 @@
                     <b-tab  class="tab-text" title="Negative">
                         <news-clip v-for="(news, index) in negativeNews"
                         :key="index"
-                        :title="news.title"
-                        :description="news.description"
-                        :url="news.image_url"
-                        :time="news.date"
-                        :link="news.news_url">
+                        :title="news.headline"
+                        :description="news.summary"
+                        :url="news.image"
+                        :time="news.datetime"
+                        :link="news.url"
+                        :source="news.source">
                         </news-clip>
                     </b-tab>
                 </div>    

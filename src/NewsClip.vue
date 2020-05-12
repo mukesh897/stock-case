@@ -6,6 +6,7 @@
         <div class="news-sub-heading">{{subHeading}}</div>
       </div>
       <p class="news-sub-heading mt-cus-17">{{content}}</p>
+      <div class="news-sub-heading mt-cus-17">Source: {{source}}</div>
     </div>
     <div class="col-lg-4">
       <img
@@ -22,7 +23,8 @@ export default {
     heading: String,
     subHeading: String,
     content: String,
-    url: String
+    url: String,
+    source: String
   },
   methods: {
     redirect() {
