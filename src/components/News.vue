@@ -88,6 +88,7 @@ computed: mapGetters(['news','positiveNews','negativeNews']),
     overflow-x:auto;
     width: 150%;
 } */
+
 .news-wrap-content {
     box-shadow: -2.5px -2.5px 2.5px 0 rgba(68, 63, 153, 0.07);
     background-color: #1e2029;
