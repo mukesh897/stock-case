@@ -6,7 +6,7 @@
         <v-container class="fill-height" fluid>
           <v-row align="center" justify="center">
             <v-col cols="12" sm="8" md="4">
-              <v-card class="login-card">
+              <v-card class="login-card" color="#252834">
                 <v-text-field
                   v-model="userEmail"
                   class="email-field"
