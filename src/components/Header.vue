@@ -1,9 +1,12 @@
 <template>
   <div class="header-wrap">
     <div class= "logo">stock <span class="logo_text-style-1">case </span></div>
-    <div class="right-container">
+    <div class="right-container" v-if="true">
       <a @click= "showLoginModal" class="log-in">login</a>
-      <button class="sign-up__button">sign up</button>
+      <button @click="showSignupModal" class="sign-up__button">sign up</button>
+    </div>
+    <div class="right-container" v-else>
+      <button @click="userLogout" class="log-out__button">logout</button>
     </div>
   </div>
 </template>
@@ -12,15 +15,20 @@
 import { mapState } from 'vuex'
 export default {
   name: 'Header',
-    computed: {
-      computed: mapState(['isUserLoggedIn'])
-    },
+  computed: mapState(['isUserLoggedIn']),
   methods: {
-      showLoginModal() {
-        this.$store.dispatch("showModalWithOptions", {
-          name: "loginModal"
-        });
-      }
+    showLoginModal() {
+      this.$store.dispatch('showModalWithOptions', { name: 'loginModal' })
+    },
+
+    showSignupModal() {
+      this.$store.dispatch('showModalWithOptions', { name: 'signUpModal' })
+    },
+
+    userLogout() {
+      this.$store.dispatch('setIsUserLoggedIn', false)
+      this.$store.dispatch('setUserId', '')
+    }
   }
 }
 </script>
@@ -81,5 +89,22 @@ export default {
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
+}
+
+.log-out__button {
+  margin-left: 29.5px;
+  padding: 0px 17px 5px;
+  border-radius: 5px;
+  border: solid 0.5px #707070;
+  background-color: #514abf;
+  font-family: MarkPro;
+  font-size: 25px;
+  font-weight: 100;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.28;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
 }
 </style>

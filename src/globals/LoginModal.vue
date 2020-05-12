@@ -1,9 +1,13 @@
 <template>
   <div>
-    <v-dialog v-model="loginModal" :width="loginModalWidth" :height="loginModalHeight"
-      @keydown.esc="loginModal = false">
+    <v-dialog
+      v-model="loginModal"
+      :width="loginModalWidth"
+      :height="loginModalHeight"
+      @keydown.esc="loginModal = false"
+      fullscreen>
       <v-content>
-        <v-container class="fill-height" fluid>
+        <v-container class="fill-height" style="background-color: #1e2029" fluid>
           <v-row align="center" justify="center">
             <v-col cols="12" sm="8" md="4">
               <v-card class="login-card" color="#252834">
@@ -108,7 +112,7 @@ class loginModal extends Vue {
 export default loginModal
 </script>
 
-<style>
+<style scoped>
   .login-card.v-card {
     padding: 10% 2.5% !important;
   }

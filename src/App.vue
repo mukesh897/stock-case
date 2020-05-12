@@ -2,6 +2,7 @@
   <v-app>
     <div class="main-wrap">
       <login-modal></login-modal>
+      <sign-up-modal></sign-up-modal>
       <router-view></router-view>
     </div>
   </v-app>
@@ -9,11 +10,13 @@
 
 <script>
 import loginModal from './globals/LoginModal.vue'
+import signUpModal from './globals/SignupModal.vue'
 
 export default {
   name: 'App',
   components: {
     loginModal,
+    signUpModal
   },
 
   data: () => ({
