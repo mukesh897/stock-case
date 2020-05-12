@@ -110,11 +110,14 @@ export default {
         }
       },
     },
-    // computed: {
-    //   ...mapState ({
-    //     zeroState: "zeroState"
-    //   }),
-    // },
+    computed: {
+      userId() {
+        return this.$store.state.userId
+      },
+      isUserLoggedIn() {
+        return this.$store.state.isUserLoggedIn
+      }
+    },
     methods: {
       async querySelections (v) {
         this.zeroState = false;
@@ -139,7 +142,7 @@ export default {
             stockIdList.push(stock["id"])
           })
           this.$router.push ({name:'dashboard',params: {symbol: this.bucket[0].symbol}})
-          var data = await NewsService.addBucket(this.stockCase, stockIdList, "f451db8f-8b23-11ea-8f60-02d8ff8d84a6")
+          var data = await NewsService.addBucket(this.stockCase, stockIdList, this.userId)
           console.log(data.result + "addBucket")
           
       },
@@ -261,7 +264,7 @@ export default {
     }
 </style>
 
-<style>
+<style scoped>
  .v-input__slot {
     border-radius: 10.5px !important;
     border: solid 0.5px #707070 !important;

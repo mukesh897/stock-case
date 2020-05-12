@@ -2,66 +2,110 @@
   <div>
     <v-dialog v-model="loginModal" :width="loginModalWidth" :height="loginModalHeight"
       @keydown.esc="loginModal = false">
-      <div class="modal-bg">
-        <div class="close-btn">
-          <i class="icon-close icon-close__style" @click="loginModal = false"></i>
-        </div>
-        <div class="mt-cus-15 center-text">
-          <p class="success-title pat-5">ALERT SET SUCCESSFULLY</p>
-          <p class="success-subtitle pat-5">Your alert for <span class="success-subtitle__bold">ETH/USDC</span> for the
-            duration of <span class="success-subtitle success-subtitle__bold">28 Days</span> has
-            been set successfully. You will be notified on reaching
-            the Trigger point of <span class="success-subtitle__bold">4,756 USDC/ETH.</span>
-          </p>
-        </div>
-        <div class="center-text">
-          <button class="button button__message">DONE</button>
-        </div>
-      </div>
+      <v-content>
+        <v-container class="fill-height" fluid>
+          <v-row align="center" justify="center">
+            <v-col cols="12" sm="8" md="4">
+              <v-card class="login-card">
+                <v-text-field
+                  v-model="userEmail"
+                  class="email-field"
+                  background-color="#1e2029"
+                  color="#ffffff"
+                  label="Email"
+                  type="text"
+                  outlined dark />
+                <v-text-field
+                  v-model="userPassword"
+                  class="password-field"
+                  background-color="#1e2029"
+                  color="#ffffff"
+                  label="Password"
+                  type="password"
+                  outlined dark />
+                <v-col align="center">
+                  <v-btn
+                    @click="userLogin"
+                    class="login-button"
+                    min-height="50px"
+                    height="7.2%"
+                    width="78%"
+                    color="#514abf">Login</v-btn>
+                  <v-divider></v-divider>
+                  <v-btn
+                    class="login-button"
+                    min-height="50px"
+                    height="7.2%"
+                    width="78%"
+                    color="#252834">Continue with Google</v-btn>
+                </v-col>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-content>
     </v-dialog>
   </div>
 </template>
 
 <script>
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from 'vue-property-decorator'
 
 @Component
 class loginModal extends Vue {
 
-  modalName = "loginModal";
-  name = "";
-  loginModalWidth = "";
-  loginModalHeight = "";
+  modalName = 'loginModal'
+  name = ''
+  loginModalWidth = ''
+  loginModalHeight = ''
 
   get loginModal() {
-    var value = this.$store.getters.getModalShowState(this.modalName);
-    return value.show;
+    let value = this.$store.getters.getModalShowState(this.modalName)
+    return value.show
   }
 
   set loginModal(value) {
     if (!value) {
-      this.$store.dispatch("hideModal", this.modalName);
+      this.$store.dispatch("hideModal", this.modalName)
     }
   }
 
   get loginModalData() {
-    var value = this.$store.getters.getModalShowState(this.modalName);
-    return value.data;
+    let value = this.$store.getters.getModalShowState(this.modalName)
+    return value.data
   }
     
   mounted() {
-    var width = window.innerWidth;
+    let width = window.innerWidth
     if(width > 678) {
-      this.loginModalWidth = "80%";
-      this.loginModalHeight = "60.9%";
+      this.loginModalWidth = "80%"
+      this.loginModalHeight = "60.9%"
     } else if(width < 678){
-      this.loginModalWidth = "75.2%";
-      this.loginModalHeight = "87.7%";
+      this.loginModalWidth = "75.2%"
+      this.loginModalHeight = "87.7%"
     }
+  }
+
+  data()  {
+    return {
+      userEmail: '',
+      userPassword: '',
+      modalName: 'loginModal',
+      name: '',
+      loginModalWidth: '',
+      loginModalHeight: '',
+    }
+  }
+
+  async userLogin() {
+    await this.$store.dispatch('callUserLogin', {
+      email: this.userEmail,
+      password: this.userPassword
+    })
   }
 }
 
-export default loginModal;
+export default loginModal
 </script>
 
 <style>

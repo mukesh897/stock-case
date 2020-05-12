@@ -42,8 +42,9 @@ export default {
       console.log(this.$router.params.symbol + "dash symbol");
     }
   },
-  mounted() {
-    this.$store.dispatch("fetchNews","general")
+  async mounted() {
+    await this.$store.dispatch("fetchNews","general")
+    // await this.$store.dispatch("fetchGraphData", { symbol: this.$router.params.symbol })
   }
 }
 </script>

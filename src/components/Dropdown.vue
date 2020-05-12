@@ -36,9 +36,17 @@ import NewsService from '../NewsService'
                 placeholder: ""
             }
         },
+      computed: {
+        userId() {
+          return this.$store.state.userId
+        },
+        isUserLoggedIn() {
+          return this.$store.state.isUserLoggedIn
+        }
+      },
         async mounted() {
             try{
-                var data = await NewsService.getBuckets("f451db8f-8b23-11ea-8f60-02d8ff8d84a6");
+                var data = await NewsService.getBuckets(this.userId);
                 this.bucketList = data.bucket;
                 this.placeholder = this.bucketList[0].bucket_name
                 this.bucketStockList = this.bucketList[0].bucket_stocks
@@ -55,7 +63,7 @@ import NewsService from '../NewsService'
                 this.bucketStockList = this.bucketList[index].bucket_stocks
                 console.log(this.bucketList[index].bucket_id + "ID ID")
                 await this.$store.dispatch("fetchBucketNews",this.bucketList[index].bucket_id);
-
+              await this.$store.dispatch("fetchBucketGraph",this.bucketList[index].bucket_id);
             },
             async updateNews(index) {
                 await this.$store.dispatch("fetchBucketNews",this.bucketStockList[index].symbol);
