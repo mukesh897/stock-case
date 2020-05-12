@@ -46,7 +46,7 @@
                   <td style="width: 40%; text-align: left !important; color: #514abf;">{{bucket[index].companyName}}</td>
                   <td>{{bucket[index].latestPrice}}</td>
                   <td>{{bucket[index].change}}</td>
-                  <td @click="deleteRow(index)">x</td>
+                  <td style="cursor: pointer;" @click="deleteRow()">x</td>
                 </tr> 
               </tbody>
             </table>
