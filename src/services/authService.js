@@ -18,8 +18,8 @@ export default {
         }
       })
       .catch((error) => {
-        return null
         console.error(error)
+        return null
       })
   },
 
@@ -41,8 +41,8 @@ export default {
         }
       })
       .catch((error) => {
-        return null
         console.error(error)
+        return null
       })
   }
 }
