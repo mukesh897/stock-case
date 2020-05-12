@@ -50,7 +50,6 @@
                 </tr> 
               </tbody>
             </table>
-            <button @click="addMore()">Add More </button>
           </div>
           <div style="text-align: center; margin-top: 8px;">
             <button class="cta" @click="createBucket">CREATE</button>
@@ -142,13 +141,6 @@ export default {
           var data = await NewsService.addBucket(this.stockCase, stockIdList, "f451db8f-8b23-11ea-8f60-02d8ff8d84a6")
           console.log(data.result + "addBucket")
           
-      },
-      addMore() {
-        this.select = "A";
-        this.stockNamesList = [];
-        this.stocks = [];
-        this.items = [];
-        this.autofocus = true;
       },
       deleteRow(index) {
         this.bucket.splice(index,1);

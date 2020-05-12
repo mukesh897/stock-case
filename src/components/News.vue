@@ -1,7 +1,7 @@
 <template>
     <div>
        <div>
-           <div style="display: flex; margin-top: 60px;">
+           <div style="display: flex;">
                <div class="news-heading news-title">NEWS:</div>
             <b-tabs  v-model="tabIndex" content-class="mt-3">
                 <div class="scroll">
@@ -86,6 +86,7 @@ computed: mapGetters(['news','positiveNews','negativeNews']),
     height: 400px;
     overflow-y: scroll;
     overflow-x:auto;
+    width: 150%;
 } */
 .news-wrap-content {
     box-shadow: -2.5px -2.5px 2.5px 0 rgba(68, 63, 153, 0.07);
