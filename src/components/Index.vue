@@ -49,9 +49,10 @@ export default {
   }
 
   .scroll {
-    height: 400px;
+    margin-top: 150px;
+    /* height: 400px;
     overflow-y: scroll;
-    overflow-x:auto;
+    overflow-x:auto; */
 }
 
   .header-wrap_index {
@@ -88,8 +89,6 @@ export default {
     width: 80%;
     margin-top: 48px;
     margin: auto;
-    height: 450px;
-    overflow-y: scroll;
   }
 
 </style>

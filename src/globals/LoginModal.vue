@@ -68,6 +68,8 @@ class loginModal extends Vue {
     return value.show
   }
 
+  
+
   set loginModal(value) {
     if (!value) {
       this.$store.dispatch("hideModal", this.modalName)
@@ -77,6 +79,9 @@ class loginModal extends Vue {
   get loginModalData() {
     let value = this.$store.getters.getModalShowState(this.modalName)
     return value.data
+  }
+  async h() {
+    
   }
     
   mounted() {

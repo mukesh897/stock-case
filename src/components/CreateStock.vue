@@ -46,7 +46,7 @@
                   <td style="width: 40%; text-align: left !important; color: #514abf;">{{bucket[index].companyName}}</td>
                   <td>{{bucket[index].latestPrice}}</td>
                   <td>{{bucket[index].change}}</td>
-                  <td @click="deleteRow(index)">x</td>
+                  <td style="cursor: pointer;" @click="deleteRow()">x</td>
                 </tr> 
               </tbody>
             </table>
@@ -144,14 +144,7 @@ export default {
           this.$router.push ({name:'dashboard',params: {symbol: this.bucket[0].symbol}})
           var data = await NewsService.addBucket(this.stockCase, stockIdList, this.userId)
           console.log(data.result + "addBucket")
-          
-      },
-      addMore() {
-        this.select = "A";
-        this.stockNamesList = [];
-        this.stocks = [];
-        this.items = [];
-        this.autofocus = true;
+
       },
       deleteRow(index) {
         this.bucket.splice(index,1);
@@ -265,7 +258,18 @@ export default {
 </style>
 
 <style scoped>
- .v-input__slot {
+  .swal2-content  {
+    font-family: MarkPro !important;
+    color: #ffffff !important;
+  }
+  .swal2-show {
+    box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16) !important;
+    background-color:  #1e2029 !important;
+  }
+  .swal2-styled.swal2-confirm {
+    background-color: #514abf !important;
+  }
+  .v-input__slot {
     border-radius: 10.5px !important;
     border: solid 0.5px #707070 !important;
     background-color: #252834;

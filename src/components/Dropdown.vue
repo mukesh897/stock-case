@@ -1,7 +1,7 @@
 <template>
     <div class="card-wrap">
         <div>
-        <b-dropdown style="width: 100%; font-size: 20px; font-family: MarkPro; text-align: left;" id="dropdown-1" :text="placeholder" class="m-md-2">
+        <b-dropdown style="width: max-content; font-size: 20px; font-family: MarkPro; text-align: left;" id="dropdown-1" :text="placeholder" class="m-md-2">
             <b-dropdown-item  v-for="(item,index) in bucketList"
             :key="index"><span class="list-text" @click="updateList(index)">{{item.bucket_name}}</span></b-dropdown-item>
         </b-dropdown>
@@ -14,12 +14,11 @@
                 <tbody>
                     <tr class="list-item" v-for="(item, index) in bucketStockList"
                         :key="index">
-                        <td style="width:78%" class="list-text">{{item.symbol}}</td>
+                        <td @click="updateNews()" style="width:78%" class="list-text">{{item.symbol}}</td>
                         <td class="list-text">{{item.price}}</td>
                     </tr>
                 </tbody>
             </table>
-            </ul>
         </div>
         </div>
     </div>
@@ -66,7 +65,7 @@ import NewsService from '../NewsService'
               await this.$store.dispatch("fetchBucketGraph",this.bucketList[index].bucket_id);
             },
             async updateNews(index) {
-                await this.$store.dispatch("fetchBucketNews",this.bucketStockList[index].symbol);
+                await this.$store.dispatch("fetcNews",this.bucketStockList[index].symbol);
             }
         }
     }
@@ -91,8 +90,26 @@ import NewsService from '../NewsService'
     }
 
     .btn-group > .btn {
+        text-align: left;
+        font-size: 20px;
+        font-family: MarkPro;
         background: transparent;
         border: 0px;
+    }
+    .dropdown-toggle::after {
+        vertical-align: 0.1rem !important;
+    }
+    .dropdown-menu.show {
+        background-color: transparent !important;
+    }
+    .btn-secondary:focus {
+        border: 0px transparent !important;
+    }
+    .btn:focus {
+        box-shadow: transparent !important;
+    }
+    .dropdown-toggle::before {
+        vertical-align: center !important;
     }
     .dropdown-menu.show {
         background-color: #252834 !important;
