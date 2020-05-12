@@ -6,7 +6,7 @@
     <div style="margin-top: 40px" >
         <div v-b-toggle.collapse-1 style="display: flex; justify-content: space-between;">
             <div class="faq-ques-title">What is stockcase?</div>
-            <div><img src="https://img.icons8.com/android/24/000000/plus.png"/></div>
+            <div><span style="color: #514abf; font-size: 32px;">+</span></div>
         </div>
         <b-collapse id="collapse-1" class="mt-2">
             <p class="faq-answer-title">Stockcase is a platform for creating, monitoring, and analyzing your stock portfolio and helping you become a more informed and confident investor.</p>
@@ -16,7 +16,7 @@
     <div >
         <div v-b-toggle.collapse-2 style="display: flex; justify-content: space-between;">
             <div class="faq-ques-title">Why should I create a stockcase?</div>
-            <div><img src="https://img.icons8.com/android/24/000000/plus.png"/></div>
+            <div><span style="color: #514abf; font-size: 32px;">+</span></div>
         </div>
         <b-collapse id="collapse-2" class="mt-2">
             <p class="faq-answer-title">Creating pool of multiple stocks helps you diversify your risks and also understand how news events affects the price fluctuation of stocks </p>
@@ -26,7 +26,7 @@
     <div >
     <div v-b-toggle.collapse-3 style="display: flex; justify-content: space-between;">
         <div class="faq-ques-title">How is the news segregated to General, Positive and Negative?</div>
-        <div><img src="https://img.icons8.com/android/24/000000/plus.png"/></div>
+        <div><span style="color: #514abf; font-size: 32px;">+</span></div>
     </div>
     <b-collapse id="collapse-3" class="mt-2">
         <p class="faq-answer-title">We use a magic spell to segregate the news into General, Positive, and Negative.
@@ -37,7 +37,7 @@ We read the sentiment presented in the news article and segregate into the appro
     <div>
         <div v-b-toggle.collapse-4 style="display: flex; justify-content: space-between;">
             <div class="faq-ques-title">Which Exchanges are available on stockcase?</div>
-            <div><img src="https://img.icons8.com/android/24/000000/plus.png"/></div>
+            <div><span style="color: #514abf; font-size: 32px;">+</span></div>
         </div>
         <b-collapse id="collapse-4" class="mt-2">
             <p class="faq-answer-title">On Stockcase, we have NASDAQ and NYSE from United States and NSE and BSE from India</p>
@@ -47,7 +47,7 @@ We read the sentiment presented in the news article and segregate into the appro
     <div>
         <div v-b-toggle.collapse-5 style="display: flex; justify-content: space-between;">
             <div class="faq-ques-title">Can I buy the stockcase that I create?</div>
-            <div><img src="https://img.icons8.com/android/24/000000/plus.png"/></div>
+            <div><span style="color: #514abf; font-size: 32px;">+</span></div>
         </div>
         <b-collapse id="collapse-5" class="mt-2">
             <p class="faq-answer-title">Right now, we don't offer the service where you could Buy and Sell the portfolio of stocks that you create but in the future, we are working towards it.</p>
