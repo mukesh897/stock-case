@@ -14,8 +14,11 @@
         </div>
     </div>
     <div class="news-wrap">
-      <news class="scroll"></news>
+      <news-dashboard></news-dashboard>
     </div>
+    <div class="faq-wrap">
+      <Faqs></Faqs>
+    </div>  
     <div class="footer-wrap">
       <Footer class="footer"></Footer>
     </div> 
@@ -25,24 +28,33 @@
 <script>
 import Header from './Header.vue'
 import Footer from './Footer.vue'
+import Faqs from './Faques.vue'
 import GraphView from './GraphView.vue'
 import Dropdown from './Dropdown.vue'
-import News from './News.vue'
+import NewsDashboard from './NewsDashboard.vue'
 export default {
   name: 'Dashboard',
   components: {
     Header,
     GraphView,
     Dropdown,
-    News,
+    NewsDashboard,
+    Faqs,
     Footer
   },
-  created: {
-    print() {
-      console.log(this.$router.params.symbol + "dash symbol");
-    }
+  created() {
+    console.log(this.$router.params.symbol + "dash symbol");
   },
   mounted() {
+    if (localStorage.getItem('reloaded')) {
+        // The page was just reloaded. Clear the value from local storage
+        // so that it will reload the next time this page is visited.
+        localStorage.removeItem('reloaded');
+    } else {
+        // Set a flag so that we know not to reload the page twice.
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
     this.$store.dispatch("fetchNews","general")
   }
 }
@@ -57,11 +69,11 @@ export default {
     padding-bottom: 80px;
   }
 
-  .scroll {
+  /* .scroll {
     height: 400px;
     overflow-y: scroll;
     overflow-x:auto;
-  }
+  } */
 
   .header-wrap_index {
     width: 80%;
@@ -82,6 +94,12 @@ export default {
     margin: auto;
   }
 
+  .faq-wrap {
+    width: 80%;
+    padding-top: 60px;
+    margin: auto;
+  }
+
   .row-wrap {
     width: 80%;
     margin: auto;
@@ -93,4 +111,13 @@ export default {
     margin: auto;
   }
 
+</style>
+
+<style>
+#__BVID__20___BV_tab_button__{
+    border-bottom: 2px solid green !important;
+}
+#__BVID__22___BV_tab_button__ {
+    border-bottom: 2px solid red !important;
+}
 </style>

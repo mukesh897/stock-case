@@ -112,6 +112,12 @@ computed: mapGetters(['news','positiveNews','negativeNews']),
 #__BVID__21___BV_tab_button__ {
     border-bottom: 2px solid red !important;
 }
+#__BVID__107___BV_tab_button__{
+    border-bottom: 2px solid green !important;
+}
+#__BVID__114___BV_tab_button__ {
+    border-bottom: 2px solid red !important;
+}
 .news-wrap-content {
     box-shadow: -2.5px -2.5px 2.5px 0 rgba(68, 63, 153, 0.07);
     background-color: #1e2029;

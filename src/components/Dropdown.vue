@@ -14,7 +14,7 @@
                 <tbody>
                     <tr class="list-item" v-for="(item, index) in bucketStockList"
                         :key="index">
-                        <td style="width:78%" class="list-text">{{item.symbol}}</td>
+                        <td @click="updateNews()" style="width:78%" class="list-text">{{item.symbol}}</td>
                         <td class="list-text">{{item.price}}</td>
                     </tr>
                 </tbody>
@@ -57,7 +57,7 @@ import NewsService from '../NewsService'
 
             },
             async updateNews(index) {
-                await this.$store.dispatch("fetchBucketNews",this.bucketStockList[index].symbol);
+                await this.$store.dispatch("fetcNews",this.bucketStockList[index].symbol);
             }
         }
     }
