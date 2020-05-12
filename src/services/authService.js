@@ -12,14 +12,14 @@ export default {
       })
         .then((response) => {
           if (response.data.result === []) {
-            console.error('Auth error')
+            console.error('userLogin: Auth error')
           } else {
-            console.log('Auth Success')
+            console.log('userLogin: Auth Success')
             resolve(response.data.result[0]['user_id'])
           }
         })
         .catch((error) => {
-          console.error(error.stack)
+          console.error(error)
           reject(error)
         })
     })
@@ -37,14 +37,15 @@ export default {
       })
         .then((response) => {
           if (response.data.result === []) {
-            console.error('Auth error')
+            console.error('userSignUp: Auth error')
+            reject(error)
           } else {
-            console.log('Auth Success')
+            console.log('userSignUp: Auth Success')
             resolve(response.data.result[0]['user_id'])
           }
         })
         .catch((error) => {
-          console.error(error.stack)
+          console.error(error)
           reject(error)
         })
     })
