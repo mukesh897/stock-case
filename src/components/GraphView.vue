@@ -18,7 +18,7 @@
         1Y
       </v-btn>
     </v-btn-toggle>
-  </div>
+</div>
 </template>
 
 <script>
@@ -54,20 +54,6 @@
             colors: ['#470ff4'],
             width: 2
           },
-          // annotations: {
-          //   xaxis: [
-          //     {
-          //       x: '',
-          //       borderColor: '#775DD0',
-          //       // label: {
-          //       //   style: {
-          //       //     color: '#fff',
-          //       //   },
-          //       //   // text: 'X-axis annotation - 22 Nov'
-          //       // }
-          //     }
-          //   ]
-          // },
           xaxis:{
             type: 'datetime',
             show: false,
@@ -120,21 +106,22 @@
       },
       methods: {
         updateGraph(interval) {
-            axios.post('http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/getStockGraph', {
-              'symbol': 'GS',
-              'range': interval
+          axios.post('http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/getStockGraph', {
+            'symbol': 'GS',
+            'range': interval
+          })
+            .then((res) => {
+              let data = []
+              for (let i = 0; i < res.data.price.length; i++) data[i] = [res.data.time[i]*1000, res.data.price[i]]
+              this.$refs.priceChart.updateSeries([{
+                name: 'price',
+                data: data
+              }])
+              // this.$refs.priceChart.addXaxisAnnotation()
             })
-              .then((res) => {
-                  let data = []
-                  for (let i = 0; i < res.data.price.length; i++) data[i] = [res.data.time[i]*1000, res.data.price[i]]
-                  this.$refs.priceChart.updateSeries([{
-                      name: 'price',
-                      data: data
-                  }])
-              })
-              .catch((error) => {
-                  console.error(error);
-              })
+            .catch((error) => {
+              console.error(error);
+            })
         }
       }
     }

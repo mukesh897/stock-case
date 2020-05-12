@@ -6,21 +6,58 @@
         <v-container class="fill-height" fluid>
           <v-row align="center" justify="center">
             <v-col cols="12" sm="8" md="4">
-              <v-card class="elevation-12" color="#252834">
-                <v-layout row wrap>
+              <v-card class="signup-card">
+                <v-layout row>
                   <v-flex xs6>
-                    <v-text-field id="firstName" label="First Name" name="firstName" type="text" outlined />
+                    <v-text-field
+                      v-model="firstName"
+                      label="First Name"
+                      type="text"
+                      background-color="#1e2029"
+                      color="#ffffff"
+                      outlined dark />
                   </v-flex>
                   <v-flex xs6>
-                    <v-text-field id="lastName" label="Last Name" name="lastName" type="text" outlined />
+                    <v-text-field
+                      v-model="lastName"
+                      label="Last Name"
+                      type="text"
+                      background-color="#1e2029"
+                      color="#ffffff"
+                      outlined dark />
                   </v-flex>
                 </v-layout>
-                  <v-text-field id="email" label="Email" name="login" type="text" outlined />
-                  <v-text-field id="password" label="Password" name="password" type="password" outlined />
-                  <v-col>
-                    <v-btn>Sign Up</v-btn>
+                  <v-text-field
+                    v-model="userEmail"
+                    class="email-field"
+                    background-color="#1e2029"
+                    color="#ffffff"
+                    label="Email"
+                    type="text"
+                    outlined dark />
+                  <v-text-field
+                    v-model="userPassword"
+                    class="password-field"
+                    background-color="#1e2029"
+                    color="#ffffff"
+                    label="Password"
+                    type="password"
+                    outlined dark />
+                  <v-col align="center">
+                    <v-btn
+                      @click="userSignUp"
+                      class="login-button"
+                      min-height="50px"
+                      height="7.2%"
+                      width="78%"
+                      color="#514abf">Sign Up</v-btn>
                     <v-divider></v-divider>
-                    <v-btn>Continue with google</v-btn>
+                    <v-btn
+                      class="login-button"
+                      min-height="50px"
+                      height="7.2%"
+                      width="78%"
+                      color="#252834">Continue with Google</v-btn>
                   </v-col>
               </v-card>
             </v-col>
@@ -32,57 +69,86 @@
 </template>
 
 <script>
-    import { Vue, Component } from "vue-property-decorator";
+  import { Vue, Component } from "vue-property-decorator";
+  import CryptoJS from "crypto-js";
+  import axios from "axios";
 
-    @Component
-    class signUpModal extends Vue {
+  @Component
+  class signUpModal extends Vue {
 
-        modalName = "signUpModal";
-        name = "";
-        signUpModalWidth = "";
-        signUpModalHeight = "";
+    modalName = 'signUpModal'
+    name = ''
+    signUpModalWidth = ''
+    signUpModalHeight = ''
 
-        get signUpModal() {
-            let value = this.$store.getters.getModalShowState(this.modalName);
-            return value.show;
-        }
-
-        set signUpModal(value) {
-            if (!value) {
-                this.$store.dispatch("hideModal", this.modalName);
-            }
-        }
-
-        get signUpModalData() {
-            let value = this.$store.getters.getModalShowState(this.modalName);
-            return value.data;
-        }
-
-        mounted() {
-            let width = window.innerWidth;
-            if(width > 678) {
-                this.signUpModalWidth = "100%";
-                this.signUpModalHeight = "100%";
-            } else if(width < 678){
-                this.signUpModalWidth = "100%";
-                this.signUpModalHeight = "100%";
-            }
-        }
+    get signUpModal() {
+      let value = this.$store.getters.getModalShowState(this.modalName)
+      return value.show
     }
 
-    export default signUpModal;
+    set signUpModal(value) {
+      if (!value) {
+        this.$store.dispatch("hideModal", this.modalName)
+      }
+    }
+
+    get signUpModalData() {
+      let value = this.$store.getters.getModalShowState(this.modalName)
+      return value.data
+    }
+
+    mounted() {
+      let width = window.innerWidth
+      if(width > 678) {
+        this.signUpModalWidth = '100%'
+        this.signUpModalHeight = '100%'
+      } else if(width < 678){
+        this.signUpModalWidth = '100%'
+        this.signUpModalHeight = '100%'
+      }
+    }
+
+    data() {
+      return {
+        firstName: '',
+        lastName: '',
+        userEmail: '',
+        userPassword: ''
+      }
+    }
+
+    userSignUp() {
+      const passwordBase64 = CryptoJS.enc.Base64.parse(this.userPassword)
+      const passwordDigest = CryptoJS.SHA256(passwordBase64).toString()
+      axios.post('http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/userSignUp', {
+        'email': this.userEmail,
+        'password': passwordDigest,
+        'first_name': this.firstName,
+        'last_name': this.lastName
+      })
+        .then((res) => {
+          if (res.data.message) {
+            console.error('Singup error')
+          } else {
+            this.$store.isUserLoggedIn = true
+            this.$store.userId = res.data.result[0].user_id
+            console.log('Signup Success')
+            // reroute here
+          }
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
+  }
+export default signUpModal;
 </script>
 
 
 <style scoped>
-  .v-text-field__slot {
-    border-radius: 10.5px !important;
-    border: solid 0.5px #707070 !important;
+  .signup-card.v-card {
     background-color: #252834;
-    width: 30%;
-    min-height: 31px !important;
-    float: right !important;
-    margin-left: auto;
+    padding: 10% 2.5% !important;
   }
 
   @media only screen and (max-width: 768px) and (max-height: 700px) {
