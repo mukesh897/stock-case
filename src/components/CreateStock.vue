@@ -254,7 +254,18 @@ export default {
 </style>
 
 <style>
- .v-input__slot {
+  .swal2-content  {
+    font-family: MarkPro !important;
+    color: #ffffff !important;
+  }
+  .swal2-show {
+    box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16) !important;
+    background-color: #252834 !important;
+  }
+  .swal2-styled.swal2-confirm {
+    background-color: #514abf !important;
+  }
+  .v-input__slot {
     border-radius: 10.5px !important;
     border: solid 0.5px #707070 !important;
     background-color: #252834;
