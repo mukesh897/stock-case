@@ -14,6 +14,13 @@ import Index from "./components/Index.vue";
 import Dashboard from "./components/Dashboard.vue";
 import './main.css'
 import vuetify from './plugins/vuetify';
+import VueSimpleAlert from "vue-simple-alert";
+import Vuesax from 'vuesax'
+
+import 'vuesax/dist/vuesax.css' //Vuesax styles
+  Vue.use(Vuesax)
+
+Vue.use(VueSimpleAlert);
 
 
 

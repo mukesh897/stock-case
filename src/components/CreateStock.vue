@@ -10,12 +10,12 @@
               :loading="loading"
               :items="items"
               :search-input.sync="search"
-              cache-items
+              :autofocus = "autofocus"
               class="mx-4"
               flat
               hide-no-data
               hide-details
-              label="Select minimum 2 stocks"
+              label="Select maximum 3 stocks"
               solo-inverted
           ></v-autocomplete>
           </div>
@@ -31,25 +31,28 @@
             </p>
           </div>
         </div>
-        <div v-else style="max-height:250px; overflow-y: scroll;">
-          <table>
-            <thead style="margin-bottom: 10px; border-bottom: 1px solid #514abf;">
-              <th style="width: 40%; text-align: left !important;">Stock</th>
-              <th>Price $</th>
-              <th>Change 24 hr</th>
-              <th>Remove</th>
-            </thead>
-            <tbody>
-              <tr v-for="(item, index) in bucket"
-              :key="index">
-                <td style="width: 40%; text-align: left !important; color: #514abf;">{{bucket[index].companyName}}</td>
-                <td>{{bucket[index].latestPrice}}</td>
-                <td>{{bucket[index].change}}</td>
-                <td @click="deleteRow(index)">x</td>
-               </tr> 
-            </tbody>
-          </table>
-          <div style="text-align: center">
+        <div v-else>
+          <div style="max-height:250px; overflow-y: scroll;">
+            <table>
+              <thead style="margin-bottom: 10px; border-bottom: 1px solid #514abf;">
+                <th style="width: 40%; text-align: left !important;">Stock</th>
+                <th>Price $</th>
+                <th>Change 24 hr</th>
+                <th>Remove</th>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in bucket"
+                :key="index">
+                  <td style="width: 40%; text-align: left !important; color: #514abf;">{{bucket[index].companyName}}</td>
+                  <td>{{bucket[index].latestPrice}}</td>
+                  <td>{{bucket[index].change}}</td>
+                  <td @click="deleteRow(index)">x</td>
+                </tr> 
+              </tbody>
+            </table>
+            <button @click="addMore()">Add More </button>
+          </div>
+          <div style="text-align: center; margin-top: 8px;">
             <button class="cta" @click="createBucket">CREATE</button>
           </div>
         </div>
@@ -66,6 +69,7 @@ export default {
       return {
         loading: false,
         items: [],
+        autofocus: false,
         zeroState: true,
         search: null,
         select: null,
@@ -84,14 +88,25 @@ export default {
           this.stocks.forEach((stock)=> {
             if(stock["name"] == this.select) {
               symbol = stock["symbol"]
+              this.items = [];
+              this.stockNamesList = [];
+              this.select = ""
             }
           })
           let data = await NewsService.getStockPrice(symbol);
-          await this.$store.dispatch("fetchNews",symbol);
+          // await this.$store.dispatch("fetchNews",symbol);
+          // this.select = "";
+          this.autofocus = false;
+          if(data.result)
+          this.stockNamesList = [];
           console.log(data.result + "result")
-          this.bucket.push(data.result);
-          console.log("Printing bucker")
-          console.log(this.bucket)
+          if(this.bucket.length <= 2) { 
+            this.bucket.push(data.result);
+            console.log("Printing bucker")
+            console.log(this.bucket)
+          } else {
+            this.$alert("you can add maximum 3 stocks");
+          }
         }
       },
     },
@@ -118,6 +133,7 @@ export default {
         }, 500)
       },
       async createBucket() {
+        this.$alert(this.stockCase + " created succesfully");
         let stockIdList = [];
           this.stocks.forEach(stock => {
             stockIdList.push(stock["id"])
@@ -127,13 +143,20 @@ export default {
           console.log(data.result + "addBucket")
           
       },
+      addMore() {
+        this.select = "A";
+        this.stockNamesList = [];
+        this.stocks = [];
+        this.items = [];
+        this.autofocus = true;
+      },
       deleteRow(index) {
         this.bucket.splice(index,1);
       }
     },
      mounted: {
       async setNews() {
-        await this.$store.dispatch("fetchNews", "Facebook Inc. Class A")
+        // await this.$store.dispatch("fetchNews", "Facebook Inc. Class A")
       }
      }
 }
@@ -165,7 +188,7 @@ export default {
       background-color: #1e2029;;
     }
     .card-wrap {
-      height: 360px;
+      height: 400px;
       border-radius: 5px;
       box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
       background-color: #252834 !important;
