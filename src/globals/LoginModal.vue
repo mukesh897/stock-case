@@ -49,77 +49,57 @@
 </template>
 
 <script>
-import { Vue, Component } from 'vue-property-decorator'
-import axios from 'axios'
-import CryptoJS from 'crypto-js'
 
+export default {
 
-@Component
-class loginModal extends Vue {
+  computed: {
+    get: () => {
+      let value = this.$store.getters.getModalShowState(this.modalName)
+      return value.show
+    },
 
-  modalName = 'loginModal'
-  name = ''
-  loginModalWidth = ''
-  loginModalHeight = ''
+    set: (value) => {
+      if (!value) {
+        this.$store.dispatch("hideModal", this.modalName)
+      }
+    },
 
-  get loginModal() {
-    let value = this.$store.getters.getModalShowState(this.modalName)
-    return value.show
-  }
-
-  set loginModal(value) {
-    if (!value) {
-      this.$store.dispatch("hideModal", this.modalName)
+    loginModalData() {
+      let value = this.$store.getters.getModalShowState(this.modalName)
+      return value.data
     }
-  }
+  },
 
-  get loginModalData() {
-    let value = this.$store.getters.getModalShowState(this.modalName)
-    return value.data
-  }
-    
+  methods: {
+    async userLogin() {
+      await this.$store.dispatch('callUserLogin', { email: this.userEmail, password: this.userPassword })
+    }
+  },
+
   mounted() {
     let width = window.innerWidth
-    if(width > 678) {
+    if (width > 678) {
       this.loginModalWidth = "80%"
       this.loginModalHeight = "60.9%"
-    } else if(width < 678){
+    } else if (width < 678) {
       this.loginModalWidth = "75.2%"
       this.loginModalHeight = "87.7%"
     }
-  }
+  },
 
-  data() {
+  data: () => {
     return {
       userEmail: '',
-      userPassword: ''
+      userPassword: '',
+      modalName: 'loginModal',
+      name: '',
+      loginModalWidth: '',
+      loginModalHeight: '',
     }
   }
-
-  userLogin() {
-    const passwordBase64 = CryptoJS.enc.Base64.parse(this.userPassword)
-    const passwordDigest = CryptoJS.SHA256(passwordBase64).toString()
-    axios.post('http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/userLogin', {
-      'email': this.userEmail,
-      'password': passwordDigest
-    })
-      .then((res) => {
-        if (res.data.result.length === 0) {
-          console.error('Auth error')
-        } else {
-          this.$store.isUserLoggedIn = true
-          this.$store.userId = res.data.result[0].user_id
-          console.log('Auth Success')
-          // reroute here
-        }
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-    }
 }
 
-export default loginModal;
+// export default loginModal;
 </script>
 
 <style scoped>

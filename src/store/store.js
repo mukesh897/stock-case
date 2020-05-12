@@ -12,7 +12,7 @@ function initialState() {
     modals: [{
       name: 'signUpModal',
       show: false
-    },
+      },
       {
         name: 'loginModal',
         show: false

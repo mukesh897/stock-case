@@ -70,8 +70,6 @@
 
 <script>
   import { Vue, Component } from "vue-property-decorator";
-  import CryptoJS from "crypto-js";
-  import axios from "axios";
 
   @Component
   class signUpModal extends Vue {
@@ -117,29 +115,14 @@
       }
     }
 
-    userSignUp() {
-      const passwordBase64 = CryptoJS.enc.Base64.parse(this.userPassword)
-      const passwordDigest = CryptoJS.SHA256(passwordBase64).toString()
-      axios.post('http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/userSignUp', {
-        'email': this.userEmail,
-        'password': passwordDigest,
-        'first_name': this.firstName,
-        'last_name': this.lastName
-      })
-        .then((res) => {
-          if (res.data.message) {
-            console.error('Singup error')
-          } else {
-            this.$store.isUserLoggedIn = true
-            this.$store.userId = res.data.result[0].user_id
-            console.log('Signup Success')
-            // reroute here
-          }
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-    }
+    // async userSignUp() {
+    //   // await this.$store.dispatch('callUserLogin', {
+    //   //   firstName: this.firstName,
+    //   //   lastName: this.lastName,
+    //   //   email: this.userEmail,
+    //   //   password: this.userPassword
+    //   // })
+    // }
   }
 export default signUpModal;
 </script>
