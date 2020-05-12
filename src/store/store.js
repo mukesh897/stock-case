@@ -114,7 +114,7 @@ export const store = new Vuex.Store({
     },
     async fetchBucketNews({dispatch},news) {
       try {
-        var response = (await NewsService.getBucketNews(news))
+        let response = (await NewsService.getBucketNews(news))
         dispatch('setNews', response.result.data)
       } catch (error) {
         dispatch('setNews', [])

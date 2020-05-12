@@ -38,7 +38,7 @@ import NewsService from '../NewsService'
         },
         async mounted() {
             try{
-                var data = await NewsService.getBuckets("f451db8f-8b23-11ea-8f60-02d8ff8d84a6");
+                let data = await NewsService.getBuckets(this.$store.userId);
                 this.bucketList = data.bucket;
                 this.placeholder = this.bucketList[0].bucket_name
                 this.bucketStockList = this.bucketList[0].bucket_stocks
