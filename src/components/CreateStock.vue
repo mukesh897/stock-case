@@ -260,7 +260,7 @@ export default {
   }
   .swal2-show {
     box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16) !important;
-    background-color: #252834 !important;
+    background-color:  #1e2029 !important;
   }
   .swal2-styled.swal2-confirm {
     background-color: #514abf !important;
