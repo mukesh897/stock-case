@@ -4,7 +4,6 @@ import { store } from './store/store.js'
 import { BootstrapVue, } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import VueApexCharts from 'vue-apexcharts'
 
 import './main.css'
 import App from './App.vue'
@@ -22,7 +21,6 @@ Vue.use(VueSimpleAlert)
 Vue.use(BootstrapVue)
 Vue.use(Vuetify)
 Vue.use(Router)
-Vue.component('apexchart', VueApexCharts)
 
 const routes = [
   { path: '/', component: Index},

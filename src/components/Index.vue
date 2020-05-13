@@ -6,6 +6,9 @@
     <div class="card-wrap">
       <Create-Stock></Create-Stock>
     </div>
+    <div class="card-wrap">
+      <GraphView></GraphView>
+    </div>
     <div class="news-wrap">
       <news class="scroll"></news>
     </div>
@@ -23,6 +26,7 @@ import Header from './Header.vue'
 import Faqs from './Faques.vue'
 import Footer from './Footer.vue'
 import CreateStock from './CreateStock.vue'
+import GraphView from "./GraphView";
 import News from './News.vue'
 export default {
   name: 'Index',
@@ -31,7 +35,8 @@ export default {
     CreateStock,
     News,
     Footer,
-    Faqs
+    Faqs,
+    GraphView
   },
   async mounted() {
     await this.$store.dispatch("fetchNews","general")
