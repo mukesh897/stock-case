@@ -2,9 +2,7 @@
   <div class="card-wrap">
     <svg @mousemove="mouseover" :width="width" :height="height">
       <g :style="{transform: `translate(${margin.left}px, ${margin.top}px)`}">
-        <path class="area" :d="paths.area" />
         <path class="line" :d="paths.line" />
-        <path class="selector" :d="paths.selector" />
       </g>
     </svg>
     <v-btn-toggle tile color="#470ff4" group>
@@ -38,7 +36,7 @@
       type: Number,
       default: 100,
     },
-  };
+  }
   export default {
     name: 'area-chart',
     props,
@@ -47,9 +45,7 @@
         width: 0,
         height: 0,
         paths: {
-          area: '',
-          line: '',
-          selector: '',
+          line: ''
         },
         lastHoverPoint: {},
         scaled: {
@@ -79,8 +75,8 @@
         this.tweenData(newData, oldData)
       },
       width: function widthChanged() {
-        this.initialize();
-        this.update();
+        this.initialize()
+        this.update()
       },
     },
     methods: {
@@ -88,9 +84,7 @@
         this.width = this.$el.offsetWidth
         this.height = this.$el.offsetHeight
       },
-      createArea: d3.area().x(d => d.x).y0(d => d.max).y1(d => d.y),
       createLine: d3.line().x(d => d.x).y(d => d.y),
-      createValueSelector: d3.area().x(d => d.x).y0(d => d.max).y1(0),
       initialize() {
         this.scaled.x = d3.scaleLinear().range([0, this.padded.width])
         this.scaled.y = d3.scaleLinear().range([this.padded.height, 0])
@@ -120,9 +114,8 @@
             x: this.scaled.x(i),
             y: this.scaled.y(d),
             max: this.height,
-          });
+          })
         }
-        this.paths.area = this.createArea(this.points)
         this.paths.line = this.createLine(this.points)
       },
       mouseover({ offsetX }) {
@@ -131,7 +124,6 @@
           const closestPoint = this.getClosestPoint(x)
           if (this.lastHoverPoint.index !== closestPoint.index) {
             const point = this.points[closestPoint.index]
-            this.paths.selector = this.createValueSelector([point])
             this.$emit('select', this.data[closestPoint.index])
             this.lastHoverPoint = closestPoint
           }
@@ -147,7 +139,7 @@
           .reduce((memo, val) => (memo.diff < val.diff ? memo : val))
       },
     },
-  };
+  }
 </script>
 
 <style scoped>
