@@ -13,6 +13,7 @@ import Dashboard from "./components/Dashboard.vue"
 import vuetify from './plugins/vuetify'
 import VueSimpleAlert from "vue-simple-alert"
 import Vuesax from 'vuesax'
+import VueApexCharts from 'vue-apexcharts'
 
 import 'vuesax/dist/vuesax.css' //Vuesax styles
 
@@ -21,6 +22,7 @@ Vue.use(VueSimpleAlert)
 Vue.use(BootstrapVue)
 Vue.use(Vuetify)
 Vue.use(Router)
+Vue.component('apexchart', VueApexCharts)
 
 const routes = [
   { path: '/', component: Index},

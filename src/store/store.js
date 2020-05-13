@@ -137,7 +137,9 @@ export const store = new Vuex.Store({
     async fetchBucketGraphData({ dispatch }, id) {
       try {
         const response = await graphService.getBucketGraphData(id)
-        dispatch('setGraphData', response)
+        let data = []
+        for (let i = 0; i < response.price.length; i++) data[i] = [response.time[i]*1000, response.price[i]]
+        dispatch('setGraphData', data)
       } catch (error) {
         dispatch('setGraphData', {})
       }
@@ -145,7 +147,9 @@ export const store = new Vuex.Store({
     async fetchGraphData({ dispatch }, { symbol, interval }) {
       try {
         const response = await graphService.getGraphData(symbol, interval)
-        dispatch('setGraphData', response)
+        let data = []
+        for (let i = 0; i < response.price.length; i++) data[i] = [response.time[i]*1000, response.price[i]]
+        dispatch('setGraphData', data)
       } catch (error) {
         dispatch('setGraphData', {})
       }
@@ -196,13 +200,13 @@ export const store = new Vuex.Store({
       }
     },
     news(state) {
-      return state.news.filter(news => (news.sentiments === 0))
+      return state.news.slice(0,15)
     },
     positiveNews: state => {
-      return state.news.filter(news => (news.sentiments > 0))
+      return state.news.filter(news => (news.sentiment > 0)).slice(0,15)
     },
     negativeNews: state => {
-      return state.news.filter(news => (news.sentiments < 0))
+      return state.news.filter(news => (news.sentiment < 0)).slice(0,15)
     },
     graphData(state) {
       return state.graphData

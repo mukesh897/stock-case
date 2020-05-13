@@ -32,6 +32,7 @@ import Faqs from './Faques.vue'
 import GraphView from './GraphView.vue'
 import Dropdown from './Dropdown.vue'
 import NewsDashboard from './NewsDashboard.vue'
+import {mapGetters} from "vuex";
 export default {
   name: 'Dashboard',
   components: {
@@ -45,11 +46,12 @@ export default {
   created() {
     console.log(this.$route.params.symbol + "dash symbol");
   },
+  computed: mapGetters(['userLoginStatus']),
   mounted() {
-    if (!this.$store.state.isUserLoggedIn) {
-      this.$alert("Please log in before creating stockcase")
-      this.$router.push({ path: 'home' })
-    }
+    // if (!userLoginStatus) {
+    //   this.$alert("Please log in before creating stockcase")
+    //   this.$router.push({ path: 'home' })
+    // }
     if (localStorage.getItem('reloaded')) {
         // The page was just reloaded. Clear the value from local storage
         // so that it will reload the next time this page is visited.
@@ -60,7 +62,7 @@ export default {
         location.reload();
     }
     this.$store.dispatch("fetchNews","general")
-    this.$store.dispatch('fetchGraphData', { symbol: this.$route.query.symbol, interval: '1D'})
+    this.$store.dispatch('fetchGraphData', { symbol: 'GS', interval: '180'})
   }
 }
 </script>

@@ -2,19 +2,19 @@
   <div class="card-wrap">
     <apexchart ref="priceChart" width="500" type="line" :options="options" :series="series"></apexchart>
     <v-btn-toggle tile color="#470ff4" group>
-      <v-btn value="1W" v-on:click="updateGraph('7')">
+      <v-btn value="1W" dark v-on:click="updateGraph('7')">
         1W
       </v-btn>
-      <v-btn value="1M" v-on:click="updateGraph('30')">
+      <v-btn value="1M" dark v-on:click="updateGraph('30')">
         1M
       </v-btn>
-      <v-btn value="3M" v-on:click="updateGraph('90')">
+      <v-btn value="3M" dark v-on:click="updateGraph('90')">
         3M
       </v-btn>
-      <v-btn value="6M" v-on:click="updateGraph('180')">
+      <v-btn value="6M" dark v-on:click="updateGraph('180')">
         6M
       </v-btn>
-      <v-btn value="1Y" v-on:click="updateGraph('360')">
+      <v-btn value="1Y" dark v-on:click="updateGraph('360')">
         1Y
       </v-btn>
     </v-btn-toggle>
@@ -22,7 +22,8 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import axios from 'axios'
+  import { mapGetters } from 'vuex'
   export default {
     data: function() {
       return {
@@ -88,16 +89,118 @@
       }
     },
     async mounted() {
-      let data = await this.$store.dispatch('fetchGraphData',this.bucketList[index].bucket_id)
-      for (let i = 0; i < res.data.price.length; i++) data[i] = [res.data.time[i], res.data.price[i]]
-      this.$refs.priceChart.updateSeries([{
+      await this.$store.dispatch('fetchGraphData', { symbol: 'GS', interval: '180'})
+      const data = this.graphData()
+      console.log(data)
+      await this.$refs.priceChart.updateSeries([{
         name: 'price',
         data: data
       }])
-
+      await this.$refs.priceChart.addXaxisAnnotation({
+        x: data[Math.round(data.length/3)][0],
+        strokeDashArray: 0,
+        borderColor: '#f35b04',
+        fillColor: '#f35b04',
+        label: {
+          borderColor: '#1b1b1d',
+          borderWidth: 1,
+          text: 'Negative News',
+          textAnchor: 'middle',
+          position: 'top',
+          orientation: 'horizontal',
+          offsetX: 0,
+          offsetY: 0,
+          style: {
+            background: '#1b1b1d',
+            color: '#ffffff',
+            fontSize: '12px',
+            fontWeight: 400,
+            cssClass: 'apexcharts-xaxis-annotation-label',
+          }
+        }
+      })
+      await this.$refs.priceChart.addXaxisAnnotation({
+        x: data[Math.round(2*data.length/3)][0],
+        strokeDashArray: 0,
+        borderColor: '#34d1bf',
+        fillColor: '#34d1bf',
+        label: {
+          borderColor: '#1b1b1d',
+          borderWidth: 1,
+          text: 'Positive News',
+          textAnchor: 'middle',
+          position: 'top',
+          orientation: 'horizontal',
+          offsetX: 0,
+          offsetY: 0,
+          style: {
+            background: '#1b1b1d',
+            color: '#ffffff',
+            fontSize: '12px',
+            fontWeight: 400,
+            cssClass: 'apexcharts-xaxis-annotation-label',
+          }
+        }
+      })
     },
     methods: {
-
+      graphData() {
+        return this.$store.getters.graphData
+      },
+      async updateGraph(interval) {
+        const data = this.graphData()
+        await this.$store.dispatch('fetchGraphData', { symbol: 'GS', interval: interval})
+        this.$refs.priceChart.updateSeries([{
+          name: 'price',
+          data: data
+        }])
+        await this.$refs.priceChart.addXaxisAnnotation({
+          x: data.time[Math.round(res.data.time.length/3)],
+          strokeDashArray: 0,
+          borderColor: '#f35b04',
+          fillColor: '#f35b04',
+          label: {
+            borderColor: '#1b1b1d',
+            borderWidth: 1,
+            text: 'Negative News',
+            textAnchor: 'middle',
+            position: 'top',
+            orientation: 'horizontal',
+            offsetX: 0,
+            offsetY: 0,
+            style: {
+              background: '#1b1b1d',
+              color: '#ffffff',
+              fontSize: '12px',
+              fontWeight: 400,
+              cssClass: 'apexcharts-xaxis-annotation-label',
+            }
+          }
+        })
+        await this.$refs.priceChart.addXaxisAnnotation({
+          x: data[Math.round(2*data.length/3)][0],
+          strokeDashArray: 0,
+          borderColor: '#34d1bf',
+          fillColor: '#34d1bf',
+          label: {
+            borderColor: '#1b1b1d',
+            borderWidth: 1,
+            text: 'Positive News',
+            textAnchor: 'middle',
+            position: 'top',
+            orientation: 'horizontal',
+            offsetX: 0,
+            offsetY: 0,
+            style: {
+              background: '#1b1b1d',
+              color: '#ffffff',
+              fontSize: '12px',
+              fontWeight: 400,
+              cssClass: 'apexcharts-xaxis-annotation-label',
+            }
+          }
+        })
+      }
     }
   }
 </script>
