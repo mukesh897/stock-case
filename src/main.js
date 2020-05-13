@@ -32,7 +32,7 @@ Vue.use(Router);
 
 const routes = [
   { path: '/', component: Index},
-  {path:'/dashboard',component: Dashboard, name:"dashboard"}
+  {path:'/dashboard',component: Dashboard, name:'dashboard', props: true}
 ];
 
 const router = new Router({
