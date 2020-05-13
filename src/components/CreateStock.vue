@@ -265,7 +265,7 @@ export default {
     float: right !important;
     margin-left: auto;
   }
-  ::v-deep .theme--light.v-sheet{
+  ::v-deep .theme--light.v-sheet {
     border: solid 0.5px #707070 !important;
     background-color: #252834 !important;
   }
