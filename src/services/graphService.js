@@ -23,11 +23,10 @@ export default {
     })
   },
 
-  async getBucketGraphData(symbol, interval) {
+  async getBucketGraphData(id) {
     return new Promise((resolve, reject) => {
       axios.post('http://ec2-54-67-79-231.us-west-1.compute.amazonaws.com:8080/stockcase/api/v1/getStockGraph', {
-        'symbol': symbol,
-        'range': interval
+        'bucket_id': id
       })
         .then((response) => {
           if (response.data === {}) {

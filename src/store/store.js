@@ -134,9 +134,9 @@ export const store = new Vuex.Store({
         dispatch('setNews', [])
       }
     },
-    async fetchBucketGraph({ dispatch }, { symbol, interval }) {
+    async fetchBucketGraphData({ dispatch }, id) {
       try {
-        const response = await graphService.getBucketGraph(symbol, interval)
+        const response = await graphService.getBucketGraphData(id)
         dispatch('setGraphData', response)
       } catch (error) {
         dispatch('setGraphData', {})

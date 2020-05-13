@@ -6,9 +6,6 @@
     <div class="card-wrap">
       <Create-Stock></Create-Stock>
     </div>
-    <div class="card-wrap">
-      <GraphView></GraphView>
-    </div>
     <div class="news-wrap">
       <news class="scroll"></news>
     </div>

@@ -1,163 +1,113 @@
 <template>
   <div class="card-wrap">
-    <svg @mousemove="mouseover" :width="width" :height="height">
-      <g :style="{transform: `translate(${margin.left}px, ${margin.top}px)`}">
-        <path class="line" :d="paths.line" />
-      </g>
-    </svg>
+    <apexchart ref="priceChart" width="500" type="line" :options="options" :series="series"></apexchart>
     <v-btn-toggle tile color="#470ff4" group>
-      <v-btn value="1W" v-on:click="">1W</v-btn>
-      <v-btn value="1M" v-on:click="">1M</v-btn>
-      <v-btn value="3M" v-on:click="">3M</v-btn>
-      <v-btn value="6M" v-on:click="">6M</v-btn>
-      <v-btn value="1Y" v-on:click="">1Y</v-btn>
+      <v-btn value="1W" v-on:click="updateGraph('7')">
+        1W
+      </v-btn>
+      <v-btn value="1M" v-on:click="updateGraph('30')">
+        1M
+      </v-btn>
+      <v-btn value="3M" v-on:click="updateGraph('90')">
+        3M
+      </v-btn>
+      <v-btn value="6M" v-on:click="updateGraph('180')">
+        6M
+      </v-btn>
+      <v-btn value="1Y" v-on:click="updateGraph('360')">
+        1Y
+      </v-btn>
     </v-btn-toggle>
-</div>
+  </div>
 </template>
 
 <script>
-  import * as d3 from 'd3'
-  import TWEEN from '@tweenjs/tween.js'
-  const props = {
-    data: {
-      type: Array,
-      default: () => [99, 71, 78, 25, 36, 92],
-    },
-    margin: {
-      type: Object,
-      default: () => ({
-        left: 0,
-        right: 0,
-        top: 10,
-        bottom: 10,
-      }),
-    },
-    ceil: {
-      type: Number,
-      default: 100,
-    },
-  }
+  import axios from 'axios';
   export default {
-    name: 'area-chart',
-    props,
-    data() {
+    data: function() {
       return {
-        width: 0,
-        height: 0,
-        paths: {
-          line: ''
+        options: {
+          chart: {
+            // id: 'price-chart',
+            height: '100%',
+            width: '100%',
+            dropShadow: {
+              enabled: true,
+              top: 2,
+              left: 0,
+              blur: 2,
+              opacity: 3,
+              color: '#000'
+            },
+            toolbar: {
+              show: false
+            },
+            zoom: {
+              enabled: false
+            }
+          },
+          grid: {
+            show: false
+          },
+          stroke: {
+            curve: 'smooth',
+            colors: ['#470ff4'],
+            width: 2
+          },
+          xaxis:{
+            type: 'datetime',
+            show: false,
+            labels: {
+              show: false
+            },
+            axisTicks: {
+              show: false
+            },
+            axisBorder: {
+              show: false
+            },
+            categories: []
+          },
+          yaxis: {
+            show: true,
+            labels: {
+              show: false
+            },
+            axisTicks: {
+              show: false
+            },
+            axisBorder: {
+              show: false
+            }
+          }
         },
-        lastHoverPoint: {},
-        scaled: {
-          x: null,
-          y: null,
-        },
-        animatedData: [],
-        points: [],
+        series: [{
+          name: 'price',
+          data: []
+        }]
       }
     },
-    computed: {
-      padded() {
-        const width = this.width - this.margin.left - this.margin.right
-        const height = this.height - this.margin.top - this.margin.bottom
-        return { width, height }
-      },
-    },
-    mounted() {
-      window.addEventListener('resize', this.onResize)
-      this.onResize()
-    },
-    beforeDestroy() {
-      window.removeEventListener('resize', this.onResize)
-    },
-    watch: {
-      data: function dataChanged(newData, oldData) {
-        this.tweenData(newData, oldData)
-      },
-      width: function widthChanged() {
-        this.initialize()
-        this.update()
-      },
+    async mounted() {
+      let data = await this.$store.dispatch('fetchGraphData',this.bucketList[index].bucket_id)
+      for (let i = 0; i < res.data.price.length; i++) data[i] = [res.data.time[i], res.data.price[i]]
+      this.$refs.priceChart.updateSeries([{
+        name: 'price',
+        data: data
+      }])
+
     },
     methods: {
-      onResize() {
-        this.width = this.$el.offsetWidth
-        this.height = this.$el.offsetHeight
-      },
-      createLine: d3.line().x(d => d.x).y(d => d.y),
-      initialize() {
-        this.scaled.x = d3.scaleLinear().range([0, this.padded.width])
-        this.scaled.y = d3.scaleLinear().range([this.padded.height, 0])
-      },
-      tweenData(newData, oldData) {
-        const vm = this
-        function animate(time) {
-          requestAnimationFrame(animate)
-          TWEEN.update(time)
-        }
-        new TWEEN.Tween(oldData)
-          .easing(TWEEN.Easing.Quadratic.Out)
-          .to(newData, 500)
-          .onUpdate(function onUpdate() {
-            vm.animatedData = this
-            vm.update()
-          })
-          .start()
-        animate()
-      },
-      update() {
-        this.scaled.x.domain(d3.extent(this.data, (d, i) => i))
-        this.scaled.y.domain([0, this.ceil])
-        this.points = []
-        for (const [i, d] of this.animatedData.entries()) {
-          this.points.push({
-            x: this.scaled.x(i),
-            y: this.scaled.y(d),
-            max: this.height,
-          })
-        }
-        this.paths.line = this.createLine(this.points)
-      },
-      mouseover({ offsetX }) {
-        if (this.points.length > 0) {
-          const x = offsetX - this.margin.left
-          const closestPoint = this.getClosestPoint(x)
-          if (this.lastHoverPoint.index !== closestPoint.index) {
-            const point = this.points[closestPoint.index]
-            this.$emit('select', this.data[closestPoint.index])
-            this.lastHoverPoint = closestPoint
-          }
-        }
-      },
-      getClosestPoint(x) {
-        return this.points
-          .map((point, index) => ({ x:
-            point.x,
-            diff: Math.abs(point.x - x),
-            index,
-          }))
-          .reduce((memo, val) => (memo.diff < val.diff ? memo : val))
-      },
-    },
+
+    }
   }
 </script>
 
-<style scoped>
+<style>
   .card-wrap {
     height: 360px;
     border-radius: 5px;
     box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
     background-color: #252834 !important;
-    padding: 5px;
   }
 
-</style>
-
-<style lang="sass" scoped>
-  svg
-    margin: 25px
-  path
-    fill: none
-    stroke: #76BF8A
-    stroke-width: 3px
 </style>

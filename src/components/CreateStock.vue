@@ -4,20 +4,20 @@
         <div class="title-wrapper">
           <div class="Create-stockcase">Create  <input style="opacity: 0.5; width: 123px;" v-model="stockCase"><img style="margin-bottom: 2px;
     height: 24px;" src="https://img.icons8.com/material-two-tone/24/000000/edit.png"/><div class="under-line"></div></div>
-          <div style="width: 30%; float: right;">
-            <v-autocomplete
-              v-model="select"
-              :loading="loading"
-              :items="items"
-              :search-input.sync="search"
-              :autofocus = "autofocus"
-              class="mx-4"
-              flat
-              hide-no-data
-              hide-details
-              label="Select maximum 3 stocks"
-              solo-inverted
-          ></v-autocomplete>
+            <div style="width: 30%; float: right;">
+              <v-autocomplete
+                v-model="select"
+                :loading="loading"
+                :items="items"
+                :search-input.sync="search"
+                :autofocus = "autofocus"
+                class="mx-4"
+                flat
+                hide-no-data
+                hide-details
+                label="Select maximum 3 stocks"
+                solo-inverted
+            ></v-autocomplete>
           </div>
         </div>
         <div v-if="zeroState == true" style="display: flex">
@@ -141,7 +141,7 @@ export default {
             stockIdList.push(stock["id"])
           })
           stockIdList = JSON.stringify(stockIdList);
-          var data = await NewsService.addBucket(this.stockCase, stockIdList, "f451db8f-8b23-11ea-8f60-02d8ff8d84a6")
+          var data = await NewsService.addBucket(this.stockCase, stockIdList, this.$store.state.userId)
           console.log(data.result + "addBucket")
           this.$router.push({name:'dashboard', query: {symbol: this.bucket[0].symbol}})
       },

@@ -1,7 +1,7 @@
 <template>
   <div class="header-wrap">
     <div class= "logo">stock <span class="logo_text-style-1">case </span></div>
-    <div class="right-container" v-if="true">
+    <div class="right-container" v-if="!this.$store.state.isUserLoggedIn">
       <a @click= "showLoginModal" class="log-in">login</a>
       <button @click="showSignupModal" class="sign-up__button">sign up</button>
     </div>
@@ -12,10 +12,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
-  computed: mapState(['isUserLoggedIn']),
   methods: {
     showLoginModal() {
       this.$store.dispatch('showModalWithOptions', { name: 'loginModal' })
@@ -27,6 +26,7 @@ export default {
 
     userLogout() {
       this.$store.dispatch('setIsUserLoggedIn', false)
+      console.log('logged out')
       this.$store.dispatch('setUserId', '')
     }
   }
