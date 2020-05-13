@@ -136,7 +136,7 @@ export default {
         if(this.bucket.length != 0)
         this.$alert(this.stockCase + " created succesfully");
         let stockIdList = [];
-          this.stocks.forEach(stock => {
+          this.bucket.forEach(stock => {
             stockIdList.push(stock["id"])
           })
           stockIdList = JSON.stringify(stockIdList);
