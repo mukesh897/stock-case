@@ -42,6 +42,9 @@ export default {
   padding: 15px;
   margin-left: -109px !important;
 }
+div:news-wrap-content:hover {
+  border: 1px solid;
+}
 .news-heading {
   font-family: MarkPro;
   font-size: 22.5px;

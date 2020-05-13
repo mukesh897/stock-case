@@ -38,7 +38,7 @@
                 <th style="width: 40%; text-align: left !important;">Stock</th>
                 <th>Price $</th>
                 <th>Change 24 hr</th>
-                <th>Remove</th>
+                <th>Sentiment</th>
               </thead>
               <tbody>
                 <tr v-for="(item, index) in bucket"
@@ -46,6 +46,7 @@
                   <td style="width: 40%; text-align: left !important; color: #514abf;">{{bucket[index].companyName}}</td>
                   <td>{{bucket[index].latestPrice}}</td>
                   <td>{{bucket[index].change}}</td>
+                  <td><span style="color: red;">3%</span><span style="color: #514abf;">/</span><span style="color: green;">97%</span></td>
                   <td style="cursor: pointer;" @click="deleteRow()">x</td>
                 </tr> 
               </tbody>
