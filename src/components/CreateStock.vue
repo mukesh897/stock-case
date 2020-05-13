@@ -44,9 +44,9 @@
                 <tr v-for="(item, index) in bucket"
                 :key="index">
                   <td style="width: 40%; text-align: left !important; color: #514abf;">{{bucket[index].companyName}}</td>
-                  <td>{{bucket[index].latestPrice}}</td>
+                  <td>{{bucket[index].price}}</td>
                   <td>{{bucket[index].change}}</td>
-                  <td><span style="color: red;">3%</span><span style="color: #514abf;">/</span><span style="color: green;">97%</span></td>
+                  <td><span style="color: red;">{{bucket[index].bullPercent}}</span><span style="color: #514abf;">/</span><span style="color: green;">{{bucket[index].bearPercent}}</span></td>
                   <td style="cursor: pointer;" @click="deleteRow()">x</td>
                 </tr> 
               </tbody>
@@ -133,6 +133,7 @@ export default {
         }, 500)
       },
       async createBucket() {
+        if(this.bucket.length != 0)
         this.$alert(this.stockCase + " created succesfully");
         let stockIdList = [];
           this.stocks.forEach(stock => {
