@@ -1,8 +1,8 @@
 <template>
   <div>
-      <div class="card-wrap">
+      <div id="create-stock" class="card-wrap">
         <div class="title-wrapper">
-          <div class="Create-stockcase">Create  <input style="opacity: 0.5; width: 123px;" v-model="stockCase"><img style="margin-bottom: 2px;
+          <div class="Create-stockcase">Create  <input class="create-stock" style="opacity: 0.5; width: 123px;" v-model="stockCase"><img style="margin-bottom: 2px;
     height: 24px;" src="https://img.icons8.com/material-two-tone/24/000000/edit.png"/><div class="under-line"></div></div>
           <div style="width: 30%; float: right;">
             <v-autocomplete
@@ -255,32 +255,25 @@ export default {
     }
 </style>
 
-<style>
-  .swal2-content  {
-    font-family: MarkPro !important;
-    color: #ffffff !important;
-  }
-  .swal2-show {
-    box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16) !important;
-    background-color:  #1e2029 !important;
-  }
-  .swal2-styled.swal2-confirm {
-    background-color: #514abf !important;
-  }
-  .v-input__slot {
+<style lang="scss" scoped>
+  ::v-deep .v-input__slot {
     border-radius: 10.5px !important;
     border: solid 0.5px #707070 !important;
     background-color: #252834;
-    width: 30%;
+    width: 100%;
     min-height: 31px !important;
     float: right !important;
     margin-left: auto;
   }
-  .theme--light.v-sheet{
+  ::v-deep .theme--light.v-sheet{
     border: solid 0.5px #707070 !important;
     background-color: #252834 !important;
   }
-  .v-input .v-label {
+  .theme--light.v-list{
+    border: solid 0.5px #707070 !important;
+    background-color: #252834 !important;
+  }
+  ::v-deep .v-input .v-label {
     opacity: 0.15 !important;
     font-family: MarkPro !important;
     font-size: 12.5px !important;
@@ -292,11 +285,11 @@ export default {
     text-align: left;
     color: #ffffff !important;
   }
-  .theme--light.v-list-item .v-list-item__mask {
+  ::v-deep .theme--light.v-list-item .v-list-item__mask {
     color: #514abf !important;
     background: transparent !important;
   }
-  .v-list-item__title {
+  ::v-deep .v-list-item__title {
     font-family: MarkPro !important;
     font-size: 16.5px !important;
     font-weight: normal;
@@ -305,5 +298,19 @@ export default {
     line-height: 1.24 !important;
     letter-spacing: normal;
     color: #ffffff !important;
+  }
+</style>
+
+<style>
+  .swal2-content {
+    font-family: MarkPro !important;
+    color: #ffffff !important;
+  }
+  .swal2-show {
+    box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16) !important;
+    background-color:  #1e2029 !important;
+  }
+  .swal2-styled.swal2-confirm {
+    background-color: #514abf !important;
   }
 </style>
