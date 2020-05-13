@@ -43,7 +43,7 @@ export default {
     Footer
   },
   created() {
-    console.log(this.$router.params.symbol + "dash symbol");
+    console.log(this.$route.params.symbol + "dash symbol");
   },
   mounted() {
     if (localStorage.getItem('reloaded')) {
