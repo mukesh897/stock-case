@@ -121,7 +121,7 @@ export const store = new Vuex.Store({
     async fetchNews({ dispatch },news) {
       try {
         let response = (await NewsService.getStockData(news))
-        dispatch('setNews', response.result.data)
+        dispatch('setNews', response.result)
       } catch (error) {
         dispatch('setNews', [])
       }
@@ -129,7 +129,7 @@ export const store = new Vuex.Store({
     async fetchBucketNews({ dispatch },news) {
       try {
         let response = (await NewsService.getBucketNews(news))
-        dispatch('setNews', response.result.data)
+        dispatch('setNews', response.result)
       } catch (error) {
         dispatch('setNews', [])
       }

@@ -52,7 +52,6 @@ import NewsService from '../NewsService'
                 setInterval(this.updateTime, 1000);
             } catch (error) {
                 console.log(error);
-                this.$router.push('/');
             }
         },
         methods: {

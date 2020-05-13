@@ -89,7 +89,6 @@
       }
     },
     async mounted() {
-      await this.$store.dispatch('fetchGraphData', { symbol: 'GS', interval: '180'})
       const data = this.graphData()
       console.log(data)
       await this.$refs.priceChart.updateSeries([{
@@ -144,18 +143,19 @@
       })
     },
     methods: {
-      graphData() {
-        return this.$store.getters.graphData
+      async graphData() {
+        return await this.$store.getters.graphData
       },
       async updateGraph(interval) {
-        const data = this.graphData()
-        await this.$store.dispatch('fetchGraphData', { symbol: 'GS', interval: interval})
+        await this.$store.dispatch('fetchGraphData', { symbol: this.$route.query.symbol, interval: interval})
+        const data = await this.graphData()
+        console.log(data)
         this.$refs.priceChart.updateSeries([{
           name: 'price',
           data: data
         }])
         await this.$refs.priceChart.addXaxisAnnotation({
-          x: data.time[Math.round(res.data.time.length/3)],
+          x: data[Math.round(2*data.length/3)][0],
           strokeDashArray: 0,
           borderColor: '#f35b04',
           fillColor: '#f35b04',

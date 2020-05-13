@@ -44,13 +44,12 @@ export default {
     Footer
   },
   created() {
-    console.log(this.$route.params.symbol + "dash symbol");
+    // console.log(this.$route.params.symbol + "dash symbol");
   },
-  computed: mapGetters(['userLoginStatus']),
-  mounted() {
-    // if (!userLoginStatus) {
+  async mounted() {
+    // if (!this.$store.state.isUserLoggedIn) {
     //   this.$alert("Please log in before creating stockcase")
-    //   this.$router.push({ path: 'home' })
+    //   this.$router.push({ path: '/' })
     // }
     if (localStorage.getItem('reloaded')) {
         // The page was just reloaded. Clear the value from local storage
@@ -61,8 +60,8 @@ export default {
         localStorage.setItem('reloaded', '1');
         location.reload();
     }
-    this.$store.dispatch("fetchNews","general")
-    this.$store.dispatch('fetchGraphData', { symbol: 'GS', interval: '180'})
+    await this.$store.dispatch("fetchNews","general")
+    await this.$store.dispatch('fetchGraphData', { symbol: this.$route.query.symbol, interval: '180'})
   }
 }
 </script>
