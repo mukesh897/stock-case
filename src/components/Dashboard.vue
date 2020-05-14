@@ -47,10 +47,10 @@ export default {
     // console.log(this.$route.params.symbol + "dash symbol");
   },
   async mounted() {
-    // if (!this.$store.state.isUserLoggedIn) {
-    //   this.$alert("Please log in before creating stockcase")
-    //   this.$router.push({ path: '/' })
-    // }
+    if (!this.$store.state.isUserLoggedIn) {
+      this.$alert("Please log in before creating stockcase")
+      this.$router.push({ path: '/' })
+    }
     if (localStorage.getItem('reloaded')) {
         // The page was just reloaded. Clear the value from local storage
         // so that it will reload the next time this page is visited.
