@@ -94,11 +94,8 @@ computed: mapGetters(['news','positiveNews','negativeNews']),
 #tab-1___BV_tab_button__ {
     border-bottom: 2px solid purple !important;
 }
-#__BVID__20___BV_tab_button__{
+#__BVID__28___BV_tab_button__{
     border-bottom: 2px solid green !important;
-}
-#__BVID__22___BV_tab_button__ {
-    border-bottom: 2px solid red !important;
 }
 #__BVID__96___BV_tab_button__{
     border-bottom: 2px solid green !important;
@@ -109,7 +106,7 @@ computed: mapGetters(['news','positiveNews','negativeNews']),
 #__BVID__19___BV_tab_button__{
     border-bottom: 2px solid green !important;
 }
-#__BVID__21___BV_tab_button__ {
+#__BVID__30___BV_tab_button__ {
     border-bottom: 2px solid red !important;
 }
 #__BVID__107___BV_tab_button__{

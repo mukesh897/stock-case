@@ -120,10 +120,10 @@ export default {
 </style>
 
 <style>
-#__BVID__20___BV_tab_button__{
+/* #__BVID__20___BV_tab_button__{
     border-bottom: 2px solid green !important;
 }
 #__BVID__22___BV_tab_button__ {
     border-bottom: 2px solid red !important;
-}
+} */
 </style>
