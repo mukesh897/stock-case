@@ -133,7 +133,7 @@ export default {
         }, 500)
       },
       async createBucket() {
-        if(this.bucket.length != 0)
+        if(this.bucket.length != 0 && this.$store.userId) {
         this.$alert(this.stockCase + " created succesfully");
         let stockIdList = [];
           this.bucket.forEach(stock => {
@@ -143,6 +143,9 @@ export default {
           var data = await NewsService.addBucket(this.stockCase, stockIdList, this.$store.state.userId)
           console.log(data.result + "addBucket")
           this.$router.push({name:'dashboard', query: {symbol: this.bucket[0].symbol}})
+        } else {
+          this.$alert("Please Login and add stocks to your bucket");
+        }
       },
       deleteRow(index) {
         this.bucket.splice(index,1);
