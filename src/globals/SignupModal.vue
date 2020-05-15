@@ -125,6 +125,7 @@
         email: this.userEmail,
         password: this.userPassword
       })
+      this.$store.dispatch("hideModal", this.modalName)
     }
   }
 export default signUpModal;

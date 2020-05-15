@@ -97,10 +97,10 @@ computed: mapGetters(['news','positiveNews','negativeNews']),
 #__BVID__28___BV_tab_button__{
     border-bottom: 2px solid green !important;
 }
-#__BVID__96___BV_tab_button__{
+#__BVID__131___BV_tab_button__{
     border-bottom: 2px solid green !important;
 }
-#__BVID__103___BV_tab_button__ {
+#__BVID__142___BV_tab_button__ {
     border-bottom: 2px solid red !important;
 }
 #__BVID__19___BV_tab_button__{

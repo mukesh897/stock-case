@@ -1,7 +1,7 @@
 <template>
   <div class="header-wrap">
     <div class= "logo">stock <span class="logo_text-style-1">case </span></div>
-    <div class="right-container" v-if="!this.$store.state.isUserLoggedIn">
+    <div class="right-container" v-if="!isUserLoggedIn">
       <a @click= "showLoginModal" class="log-in">login</a>
       <button @click="showSignupModal" class="sign-up__button">sign up</button>
     </div>
@@ -15,6 +15,7 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
+  computed: mapGetters(['isUserLoggedIn']),
   methods: {
     showLoginModal() {
       this.$store.dispatch('showModalWithOptions', { name: 'loginModal' })

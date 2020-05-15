@@ -61,7 +61,7 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
+import { mapGetters} from 'vuex'
 import NewsService from '../NewsService';
 export default {
   name: 'CreateStock',
@@ -78,6 +78,7 @@ export default {
         stocks: [],
       }
     },
+    computed: mapGetters(['isUserLoggedIn','userId']),
     watch: {
       async search(val) {
         let placeholder = val && val !== this.select && this.querySelections(val)
@@ -133,14 +134,14 @@ export default {
         }, 500)
       },
       async createBucket() {
-        if(this.bucket.length != 0 && this.$store.userId) {
+        if(this.bucket.length != 0 && this.isUserLoggedIn) {
         this.$alert(this.stockCase + " created succesfully");
         let stockIdList = [];
           this.bucket.forEach(stock => {
             stockIdList.push(stock["id"])
           })
           stockIdList = JSON.stringify(stockIdList);
-          var data = await NewsService.addBucket(this.stockCase, stockIdList, this.$store.state.userId)
+          var data = await NewsService.addBucket(this.stockCase, stockIdList, this.userId)
           console.log(data.result + "addBucket")
           this.$router.push({name:'dashboard', query: {symbol: this.bucket[0].symbol}})
         } else {

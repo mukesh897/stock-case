@@ -88,6 +88,7 @@
         }]
       }
     },
+    computed: mapGetters(['graphData']),
     async mounted() {
       const data = this.graphData()
       console.log(data)
@@ -143,9 +144,6 @@
       })
     },
     methods: {
-      async graphData() {
-        return await this.$store.getters.graphData
-      },
       async updateGraph(interval) {
         await this.$store.dispatch('fetchGraphData', { symbol: this.$route.query.symbol, interval: interval})
         const data = await this.graphData()

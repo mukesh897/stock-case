@@ -211,7 +211,7 @@ export const store = new Vuex.Store({
     graphData(state) {
       return state.graphData
     },
-    userLoginStatus(state) {
+    isUserLoggedIn(state) {
       return state.isUserLoggedIn
     },
     userId(state) {
