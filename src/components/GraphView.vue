@@ -90,7 +90,7 @@
     },
     computed: mapGetters(['graphData']),
     async mounted() {
-      const data = this.graphData()
+      const data = this.graphData
       console.log(data)
       await this.$refs.priceChart.updateSeries([{
         name: 'price',
@@ -145,8 +145,7 @@
     },
     methods: {
       async updateGraph(interval) {
-        await this.$store.dispatch('fetchGraphData', { symbol: this.$route.query.symbol, interval: interval})
-        const data = await this.graphData()
+        var data = await this.$store.dispatch('fetchGraphData', { symbol: this.$route.query.symbol, interval: interval})
         console.log(data)
         this.$refs.priceChart.updateSeries([{
           name: 'price',
