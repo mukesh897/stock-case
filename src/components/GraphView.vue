@@ -145,7 +145,7 @@
     },
     methods: {
       async updateGraph(interval) {
-        var data = await this.$store.dispatch('fetchGraphData', { symbol: this.$route.query.symbol, interval: interval})
+        var data = await this.$store.dispatch('fetchGraphData', { symbol: 'GS', interval: interval})
         console.log(data)
         this.$refs.priceChart.updateSeries([{
           name: 'price',
