@@ -108,4 +108,22 @@ export default {
   text-align: center;
   color: #ffffff;
 }
+@media only screen and (max-width: 768px){
+  .sign-up__button {
+    height: 25px;
+    font-size: 17px;
+    padding: 0px;
+  }
+  .logo {
+    font-size: 17px;
+  }
+  .log-in {
+    font-size: 17px;
+  }
+  .log-out__button {
+    height: 25px;
+    font-size: 17px;
+    padding: 0px;
+  }
+}
 </style>

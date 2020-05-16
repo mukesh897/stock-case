@@ -22,7 +22,7 @@
         </div>
         <div v-if="zeroState == true" style="display: flex">
           <div style="width: 30%;"> 
-            <img style="height: 24%; margin-left: 70px;" src="../assets/images/group_119.png">
+            <img class="img-cus" src="../assets/images/group_119.png">
           </div>
           <div class="zero-text-wrap">
             <p class="zero-state-text">
@@ -170,6 +170,10 @@ export default {
       font-family: MarkPro;
       background-color: #34d1bf;
     }
+    .img-cus {
+      height: 24%; 
+      margin-left: 70px;
+    }
     .line {
       box-shadow: 0 1.5px 3px 0 rgba(0, 0, 0, 0.16);
       background-color: #514abf;;
@@ -256,6 +260,22 @@ export default {
     }
     tr {
       height: 60px;
+    }
+    @media only screen and (max-width: 768px){
+      .zero-state-text {
+        font-size: 17px;
+      }
+      .img-cus {
+        height: 24%; 
+        margin-left: 0px;
+      }
+      td {
+        font-size: 12px;
+      }
+      th {
+        font-size: 12px;
+      }
+      
     }
 </style>
 

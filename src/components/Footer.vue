@@ -3,8 +3,8 @@
         <div class="footer-wrap">
         <div class= "logo">stock <span class="logo_text-style-1">case </span></div>
         <div class="right-container">
-            <a class="links">create</a>
-            <a  class="links">blog</a>
+            <!-- <a class="links">create</a> -->
+            <!-- <a  class="links">blog</a> -->
             <a @click= "showLoginModal" class="links">log in</a>
             <a class="links">sign up</a>       
         </div>
@@ -98,5 +98,13 @@ export default {
     letter-spacing: normal;
     text-align: center;
     color: #ffffff;
+}
+@media only screen and (max-width: 768px){
+    .logo {
+      font-size: 17px;
+    }
+    .links {
+        font-size: 10px;
+    }
 }
 </style>
